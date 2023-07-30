@@ -14,6 +14,8 @@
 	String user = "root";
 	String pass = "1234";
 	
+	
+	
 	User4VO vo = new User4VO();
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -24,9 +26,7 @@
 		ResultSet rs = psmt.executeQuery();
 		
 		if(rs.next()){
-			vo.setSeq(rs.getInt(1));
 			vo.setName(rs.getString(2));
-			vo.setGender(rs.getInt(3));
 			vo.setAge(rs.getInt(4));
 			vo.setAddr(rs.getString(5));
 		}
@@ -49,7 +49,7 @@
 		<a href="/Ch06/1_JDBC.jsp">처음으로</a>
 		<a href="/Ch06/user4/list.jsp">User4 목록</a>
 		
-		<form action="/Ch06/user4/modifyProc.jsp">
+		<form action="/Ch06/user4/modifyProc.jsp" method="post">
 			<table border="1">
 				<tr>
 					<td>이름</td>
@@ -60,7 +60,7 @@
 					<td>
 						<label><input type="radio" name="gender" value="1">남</label>
 						<label><input type="radio" name="gender" value="2">여</label>
-					</td>			
+					</td>
 				</tr>
 				<tr>
 					<td>나이</td>

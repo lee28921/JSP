@@ -68,7 +68,7 @@
 				<td><%= vo.getAddr() %></td>
 				<td>
 					<a href="/Ch06/user4/modify.jsp?uid=<%= vo.getSeq() %>">수정</a>
-					<a href="#">삭제</a>
+					<a href="/Ch06/user4/delete.jsp?uid=<%= vo.getSeq() %>">삭제</a>
 				</td>
 			</tr>
 			<% } %>

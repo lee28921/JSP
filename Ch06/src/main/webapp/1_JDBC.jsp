@@ -21,4 +21,4 @@
 		<a href="/Ch06/member/register.jsp">Member CRUD 실습</a>
 		
 	</body>
-</html>
+</html> 
