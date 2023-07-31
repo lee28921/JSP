@@ -1,3 +1,6 @@
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.naming.Context"%>
 <%@page import="vo.User2VO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -15,8 +18,14 @@
 	List<User2VO> users = new ArrayList<>();
 	
 	try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection conn = DriverManager.getConnection(host, user, pass);
+		// JNDI 서비스 객체생성
+		Context initCtx = new InitialContext();
+		Context ctx = (Context) initCtx.lookup("java:comp/env");
+		
+		// 커넥션 풀에서 커넥션 가져오기
+		DataSource ds = (DataSource) ctx.lookup("jdbc/userdb");
+		Connection conn = ds.getConnection();
+		
 		Statement stmt = conn.createStatement();
 		
 		ResultSet rs = stmt.executeQuery("SELECT * FROM `User2`");
