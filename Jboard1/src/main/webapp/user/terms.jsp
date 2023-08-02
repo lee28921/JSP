@@ -1,11 +1,45 @@
+<%@page import="kr.co.jboard1.vo.TermsVO"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.naming.Context"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+
+	TermsVO vo = new TermsVO();
+
+	try {
+		Context initCtx = new InitialContext();
+		Context ctx = (Context) initCtx.lookup("java:comp/env");
+		DataSource ds = (DataSource) ctx.lookup("jdbc/Jboard");
+		
+		Connection conn = ds.getConnection();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM `terms`");
+		
+		if(rs.next()){
+			vo.setTerms(rs.getString(1));
+			vo.setPrivacy(rs.getString(2));
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		
+	} catch(Exception e){
+		e.printStackTrace();
+	}
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jboard::terms</title>
-    <link rel="stylesheet" href="../css/style.css">    
+    <title>이용약관</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
 </head>
 <body>
     <div id="container">
@@ -18,7 +52,7 @@
                     <caption>사이트 이용약관</caption>
                     <tr>
                         <td>
-                            <textarea readonly>약관내용</textarea>
+                            <textarea readonly><%= vo.getTerms() %></textarea>
                             <p>
                                 <label><input type="checkbox" name="chk1"/>동의합니다.</label>
                             </p>
@@ -29,7 +63,7 @@
                     <caption>개인정보 취급방침</caption>
                     <tr>
                         <td>
-                            <textarea readonly>개인정보 내용</textarea>
+                            <textarea readonly><%= vo.getPrivacy() %></textarea>
                             <p>
                                 <label><input type="checkbox" name="chk2"/>동의합니다.</label>
                             </p>
