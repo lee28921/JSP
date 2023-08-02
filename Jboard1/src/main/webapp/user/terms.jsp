@@ -39,7 +39,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이용약관</title>
     <link rel="stylesheet" href="../css/style.css">
-    
+    <script>
+    	
+    	window.onload = function(){
+			 
+    		const chk1 = document.getElementsByName('chk1')[0];
+    		const chk2 = document.getElementsByName('chk2')[0];
+    		
+    		const btnNext = document.querySelector('.btnNext');
+    		btnNext.addEventListener('click',function(e){
+    			e.preventDefault();
+    			
+    			if(!chk1.checked){
+    				alert('이용약관에 동의하셔야 합니다.');
+    				return;
+    			}else if(!chk2.checked){
+    				alert('개인정보 취급방침에 동의하셔야 합니다.');
+    				return;
+    			}else{
+    				location.href ='/Jboard1/user/register.jsp';
+    			}
+    			
+    		});
+    	}
+    </script>
 </head>
 <body>
     <div id="container">
@@ -71,8 +94,8 @@
                     </tr>
                 </table>
                 <div>
-                    <a href="#" class="btnCancel">취소</a>
-                    <a href="#" class="btnNext">다음</a>
+                    <a href="/Jboard1/user/login.jsp" class="btnCancel">취소</a>
+                    <a href="#"  class="btnNext">다음</a>
                 </div>
             </section>
         </main>
