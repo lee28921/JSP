@@ -45,7 +45,7 @@ function zipcode() {
             document.getElementsByName('zip')[0].value = data.zonecode;
             document.getElementsByName("addr1")[0].value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("addr2")[0].focus(); // 초기화
+            document.getElementsByName("addr2")[0].focus(); // 초기화
         }
     }).open();
 }
