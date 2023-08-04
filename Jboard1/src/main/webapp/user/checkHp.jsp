@@ -1,3 +1,4 @@
+<%@page import="kr.co.jboard1.dao.UserDAO"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -12,28 +13,8 @@
 	
 	String hp = request.getParameter("hp");
 	
-	int result = 0;
-	try {
-		Context initCtx = new InitialContext();
-		Context ctx = (Context) initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource) ctx.lookup("jdbc/Jboard");
-		
-		Connection conn = ds.getConnection();
-		PreparedStatement psmt = conn.prepareStatement("SELECT COUNT(*) FROM `User` WHERE `hp`=?");
-		psmt.setString(1, hp);
-		
-		ResultSet rs = psmt.executeQuery();
-		
-		if(rs.next()){
-			result = rs.getInt(1);
-		}
-		rs.close();
-		psmt.close();
-		conn.close();
-		
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
+	int result = UserDAO.getInstance().selectCountHp(hp);
+	
 	
 	// json 생성
 	JsonObject json = new JsonObject();

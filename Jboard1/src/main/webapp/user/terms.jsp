@@ -1,3 +1,4 @@
+<%@page import="kr.co.jboard1.dao.UserDAO"%>
 <%@page import="kr.co.jboard1.vo.TermsVO"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
@@ -11,8 +12,11 @@
 	TermsVO vo = new TermsVO();
 
 	try {
+		// JNDI 객체 서비스 생성
 		Context initCtx = new InitialContext();
-		Context ctx = (Context) initCtx.lookup("java:comp/env");
+		Context ctx = (Context) initCtx.lookup("java:comp/env"); // JNDI 기본 환경 이름
+		
+		// 커넥션 풀에서 커넥션 가져오기
 		DataSource ds = (DataSource) ctx.lookup("jdbc/Jboard");
 		
 		Connection conn = ds.getConnection();
@@ -20,6 +24,7 @@
 		ResultSet rs = stmt.executeQuery("SELECT * FROM `terms`");
 		
 		if(rs.next()){
+			vo = new TermsVO();
 			vo.setTerms(rs.getString(1));
 			vo.setPrivacy(rs.getString(2));
 		}
@@ -30,7 +35,6 @@
 	} catch(Exception e){
 		e.printStackTrace();
 	}
-
 %>
 <!DOCTYPE html>
 <html lang="en">
