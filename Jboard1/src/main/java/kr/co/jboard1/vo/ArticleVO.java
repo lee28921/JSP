@@ -3,15 +3,15 @@ package kr.co.jboard1.vo;
 public class ArticleVO {
 	private int no;
 	private int parent;
-	private int comment;
+	private int comment; // 댓글 수
 	private String cate;
-	private String title;
-	private String content;
-	private int file;
-	private int hit;
-	private String writer;
-	private String regip;
-	private String rdate; 
+	private String title; // 제목
+	private String content; // 내용
+	private int file; // 파일
+	private int hit; // 조회수
+	private String writer; // 닉네임(현재는 아이디)
+	private String regip; // 유저 식별번호
+	private String rdate; // 작성일
 	
 	public int getNo() {
 		return no;
@@ -74,6 +74,9 @@ public class ArticleVO {
 		this.regip = regip;
 	}
 	public String getRdate() {
+		return rdate.substring(2,10); // 년,월,일만 보이게
+	}
+	public String getFullRdate() {
 		return rdate;
 	}
 	public void setRdate(String rdate) {
