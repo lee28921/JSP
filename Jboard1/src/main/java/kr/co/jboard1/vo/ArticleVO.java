@@ -10,8 +10,8 @@ public class ArticleVO {
 	private int file;
 	private int hit;
 	private String writer;
-	private String egip;
-	private String rdate;
+	private String regip;
+	private String rdate; 
 	
 	public int getNo() {
 		return no;
@@ -67,11 +67,11 @@ public class ArticleVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public String getEgip() {
-		return egip;
+	public String getRegip() {
+		return regip;
 	}
-	public void setEgip(String egip) {
-		this.egip = egip;
+	public void setRegip(String regip) {
+		this.regip = regip;
 	}
 	public String getRdate() {
 		return rdate;
@@ -79,4 +79,6 @@ public class ArticleVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	
+	
 }
