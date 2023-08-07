@@ -2,7 +2,6 @@ package kr.co.jboard1.dao;
 
 import kr.co.jboard1.db.DBHelper;
 import kr.co.jboard1.db.SQL;
-import kr.co.jboard1.vo.TermsVO;
 import kr.co.jboard1.vo.UserVO;
 
 public class UserDAO extends DBHelper {
