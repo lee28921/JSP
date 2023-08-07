@@ -10,12 +10,12 @@
                 <table>
                     <tr>
                         <td>제목</td>
-                        <td><input type="text" name="title" placeholder="제목을 입력하세요."/></td>
+                        <td><input type="text" name="title" required placeholder="제목을 입력하세요."/></td>
                     </tr>
                     <tr>
                         <td>내용</td>
                         <td>
-                            <textarea name="content"></textarea>                                
+                            <textarea name="content" required></textarea>
                         </td>
                     </tr>
                     <tr>
