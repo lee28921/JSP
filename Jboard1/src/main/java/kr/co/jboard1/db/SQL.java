@@ -33,5 +33,7 @@ public class SQL {
 													+ "b.`nick` "
 													+ "FROM `Article` AS a "
 													+ "JOIN `User` AS b ON a.writer = b.uid "
-													+ "ORDER BY `no` DESC";
+													+ "ORDER BY `no` DESC "
+													+ "LIMIT ?, 10";
+	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article`";
 }

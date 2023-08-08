@@ -31,13 +31,14 @@ public class ArticleDAO extends DBHelper {
 	public ArticleVO selectArtcle(int no) {
 		return null;
 	}
-	public List<ArticleVO> selectArtcles() { // 글목록
+	public List<ArticleVO> selectArtcles(int start) { // 글목록
 		
 		List<ArticleVO> articles = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_ARITCLES);
+			psmt.setInt(1, start);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -65,11 +66,33 @@ public class ArticleDAO extends DBHelper {
 		}
 		return articles;
 	}
+	
 	public void updateArtcle(ArticleVO vo) {
 		
 	}
 	public void deleteArtcle(int no) {
 		
+	}
+	
+	// 추가
+	public int selectCountTotal() { // 전체 게시물 갯수 조회
+		
+		int total = 0;
+		
+		try {
+		conn = getConnection();
+		psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
+		rs = psmt.executeQuery();
+		
+		if(rs.next()) {
+			total = rs.getInt(1);
+		}
+		close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return total;
 	}
 	
 }
