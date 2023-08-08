@@ -2,7 +2,7 @@ package kr.co.jboard1.dao;
 
 import kr.co.jboard1.db.DBHelper;
 import kr.co.jboard1.db.SQL;
-import kr.co.jboard1.vo.UserVO;
+import kr.co.jboard1.dto.UserDTO;
 
 public class UserDAO extends DBHelper {
 
@@ -13,21 +13,21 @@ public class UserDAO extends DBHelper {
 	
 	private UserDAO() {}
 	
-	public void insertUser(UserVO vo) {
+	public void insertUser(UserDTO dto) {
 		try {
 			conn = getConnection();
 			
 			psmt = conn.prepareStatement(SQL.INSERT_USER);
-			psmt.setString(1, vo.getUid());
-			psmt.setString(2, vo.getPass());
-			psmt.setString(3, vo.getName());
-			psmt.setString(4, vo.getNick());
-			psmt.setString(5, vo.getEmail());
-			psmt.setString(6, vo.getHp());
-			psmt.setString(7, vo.getZip());
-			psmt.setString(8, vo.getAddr1());
-			psmt.setString(9, vo.getAddr2());
-			psmt.setString(10, vo.getRegip());
+			psmt.setString(1, dto.getUid());
+			psmt.setString(2, dto.getPass());
+			psmt.setString(3, dto.getName());
+			psmt.setString(4, dto.getNick());
+			psmt.setString(5, dto.getEmail());
+			psmt.setString(6, dto.getHp());
+			psmt.setString(7, dto.getZip());
+			psmt.setString(8, dto.getAddr1());
+			psmt.setString(9, dto.getAddr2());
+			psmt.setString(10, dto.getRegip());
 			
 			psmt.executeUpdate();
 			
@@ -37,9 +37,9 @@ public class UserDAO extends DBHelper {
 			e.printStackTrace();
 		}
 	}
-	public UserVO selectUser(String uid, String pass) {
+	public UserDTO selectUser(String uid, String pass) {
 		
-		UserVO user = null;
+		UserDTO user = null;
 		
 		try {
 			
@@ -51,7 +51,7 @@ public class UserDAO extends DBHelper {
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				user = new UserVO();
+				user = new UserDTO();
 				user.setUid(rs.getString(1));
 				user.setPass(rs.getString(2));
 				user.setName(rs.getString(3));
