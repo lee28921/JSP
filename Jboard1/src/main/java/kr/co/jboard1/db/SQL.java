@@ -28,5 +28,10 @@ public class SQL {
 												+ "`writer`=?,"
 												+ "`regip`=?,"
 												+ "`rdate`=NOW()";
-	public final static String SELECT_ARITCLES = "SELECT * FROM `Article`";
+	public final static String SELECT_ARITCLES = "SELECT "
+													+ "a.*, "
+													+ "b.`nick` "
+													+ "FROM `Article` AS a "
+													+ "JOIN `User` AS b ON a.writer = b.uid "
+													+ "ORDER BY `no` DESC";
 }

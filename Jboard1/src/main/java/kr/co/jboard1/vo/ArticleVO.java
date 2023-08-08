@@ -13,6 +13,16 @@ public class ArticleVO {
 	private String regip; // 유저 식별번호
 	private String rdate; // 작성일
 	
+	// 추가 필드
+	private String nick;
+	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	
 	public int getNo() {
 		return no;
 	}
