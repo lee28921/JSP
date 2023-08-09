@@ -17,7 +17,12 @@
 	dto.setRegip(regip);
 	
 	ArticleDAO dao = new ArticleDAO();
+	
+	// 댓글 입력
 	dao.insertComment(dto);
+	
+	// 댓글 카운트 수정
+	dao.updateArticleForComment(parent);
 	
 	response.sendRedirect("/Jboard1/view.jsp?no="+parent);
 %>

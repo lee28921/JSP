@@ -124,6 +124,41 @@ public class ArticleDAO extends DBHelper {
 		return total;
 	}
 	
+	public List<ArticleDTO> selectComments(String parent) {
+		
+		List<ArticleDTO> articles = new ArrayList<>();
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COMMENTS);
+			psmt.setString(1, parent);
+			
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				ArticleDTO dto = new ArticleDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setParent(rs.getInt(2));
+				dto.setComment(rs.getInt(3));
+				dto.setCate(rs.getString(4));
+				dto.setTitle(rs.getString(5));
+				dto.setContent(rs.getString(6));
+				dto.setFile(rs.getInt(7));
+				dto.setHit(rs.getInt(8));
+				dto.setWriter(rs.getString(9));
+				dto.setRegip(rs.getString(10));
+				dto.setRdate(rs.getString(11));
+				dto.setNick(rs.getString(12));
+				
+				articles.add(dto);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return articles;
+	}
+	
 	public void insertComment(ArticleDTO dto) {
 		try {
 			conn = getConnection();
@@ -137,6 +172,19 @@ public class ArticleDAO extends DBHelper {
 			close();
 			
 		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateArticleForComment(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE_FOR_COMMENT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
