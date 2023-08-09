@@ -36,4 +36,5 @@ public class SQL {
 													+ "ORDER BY `no` DESC "
 													+ "LIMIT ?, 10";
 	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article`";
+	public final static String SELECT_ARITCLE = "SELECT * FROM `Article` WHERE `no`=?";
 }
