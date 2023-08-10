@@ -51,7 +51,13 @@ public class SQL {
 													+ "FROM `Article` AS a "
 													+ "JOIN `User` AS b ON a.writer = b.uid "
 													+ "WHERE `parent`=?";
-	public final static String UPDATE_ARTICLE_FOR_COMMENT_PLUS = "UPDATE `Article` SET `comment`=`comment`+1 WHERE `no`=?";
-	public final static String UPDATE_ARTICLE_FOR_COMMENT_MINUS = "UPDATE `Article` SET `comment`=`comment`-1 WHERE `no`=?";
+	public final static String UPDATE_ARITCLE = "UPDATE `Article` SET "
+													+ "`title`=?, "
+													+ "`content`=? "
+													+ "WHERE `no`=?";
+	
+	public final static String UPDATE_ARITCLE_FOR_COMMENT_PLUS = "UPDATE `Article` SET `comment`=`comment`+1 WHERE `no`=?";
+	public final static String UPDATE_ARITCLE_FOR_COMMENT_MINUS = "UPDATE `Article` SET `comment`=`comment`-1 WHERE `no`=?";
+	
 	public final static String DELETE_COMMINT = "DELETE FROM `Article` WHERE `no`=?";
 }

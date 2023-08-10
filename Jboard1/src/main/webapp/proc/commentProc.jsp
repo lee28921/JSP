@@ -8,7 +8,7 @@
 	String content = request.getParameter("content");
 	String parent = request.getParameter("parent");
 	String writer = request.getParameter("writer");
-	String regip = request.getLocalAddr();
+	String regip = request.getRemoteAddr();
 	
 	ArticleDTO dto = new ArticleDTO();
 	dto.setContent(content);
