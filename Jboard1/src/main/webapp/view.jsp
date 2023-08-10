@@ -31,6 +31,15 @@
 			return false;
 		});
 		
+		// 댓글쓰기 취소
+		const commentContent = document.querySelector('form > textarea[name=content]');
+		const btnCancel = document.querySelector('.btnCancel');
+		btnCancel.onclick = function(e){
+			e.preventDefault();
+			commentContent.value = '';
+		
+		}
+		
 		// 원글 삭제
 		const btnDelete = document.getElementsByClassName('btnDelete')[0];
 		btnDelete.onclick = function(){
