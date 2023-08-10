@@ -116,6 +116,7 @@ public class ArticleDAO extends DBHelper {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
 			psmt.setString(1, no);
+			psmt.setString(2, no);
 			
 			psmt.executeUpdate();
 			
