@@ -26,6 +26,7 @@
 			
 			if(txt == '수정'){
 				// 수정 모드 전환
+				
 				$(this).parent().prev().addClass('modi');
 				$(this).parent().prev().attr('readonly', false);
 				$(this).parent().prev().focus();
@@ -34,8 +35,10 @@
 			}else{
 				// '수정완료' 클릭
 				
-				// 수정 데이터 전송
-				$(this).closest('form').submit();
+				if(confirm('댓글을 수정 하시겠습니까?')) {
+					// 수정 데이터 전송
+					$(this).closest('form').submit();
+				}
 				
 				// 수정모드 해제
 				$(this).parent().prev().removeClass('modi');
@@ -47,6 +50,19 @@
 			
 		});
 		
+		// 댓글 수정 취소
+		/* 
+		$('.can').click(function(e){
+			e.preventDefault();
+			
+			// 수정모드 해제
+			$(this).parent().prev().removeClass('modi');
+			$(this).parent().prev().attr('readonly',true);
+			$(this).hide();
+			$(this).next().text('수정');
+			
+		}); 
+		*/
 		
 		// 댓글 삭제
 		$('.del').click(function(){
@@ -134,7 +150,7 @@
 	                <% if(sessUser.getUid().equals(comment.getWriter())){ %>
 	                <div>
 	                    <a href="/Jboard1/proc/commentDelete.jsp?no=<%= comment.getNo() %>&parent=<%= comment.getParent() %>" class="del">삭제</a>
-	                    <a href="#" class="can">취소</a>
+	                    <a href="/Jboard1/view.jsp?no=<%= no %>" class="can">취소</a>
 	                    <a href="#" class="mod">수정</a>
 	                </div>
 	                <% } %>
