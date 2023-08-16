@@ -32,7 +32,7 @@
             <p>
                 <a href="/Farmstory1/index.jsp">HOME |</a>
                 <a href="/Farmstory1/user/login.jsp">로그인 |</a>
-                <a href="/Farmstory1/user/register.jsp">회원가입 |</a>
+                <a href="/Farmstory1/user/terms.jsp">회원가입 |</a>
                 <a href="/Farmstory1/admin/">관리자 |</a>
                 <a href="#">고객센터</a>
             </p>
