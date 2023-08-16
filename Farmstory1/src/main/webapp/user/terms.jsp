@@ -1,3 +1,5 @@
+<%@page import="kr.farmstory1.dao.UserDAO"%>
+<%@page import="kr.farmstory.dto.TermsDTO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <script>
@@ -17,19 +19,22 @@
 				alert('개인정보 취급방침에 동의하셔야 합니다.');
 				return;
 			}else{
-				location.href ='/Famstory1/user/register.jsp';
+				location.href ='/Farmstory1/user/register.jsp';
 			}
 			
 		});
 	}
 </script>
+<%
+	TermsDTO dto = UserDAO.getInstance().selectTerms();
+%>
 <div id="user">
 	<section class="terms">
                 <table>
                     <caption>사이트 이용약관</caption>
                     <tr>
                         <td>
-                            <textarea readonly></textarea>
+                            <textarea readonly><%= dto.getTerms() %></textarea>
                             <p>
                                 <label><input type="checkbox" name="chk1"/>동의합니다.</label>
                             </p>
@@ -40,7 +45,7 @@
                     <caption>개인정보 취급방침</caption>
                     <tr>
                         <td>
-                            <textarea readonly></textarea>
+                            <textarea readonly><%= dto.getPrivacy() %></textarea>
                             <p>
                                 <label><input type="checkbox" name="chk2"/>동의합니다.</label>
                             </p>
