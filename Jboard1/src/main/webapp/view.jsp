@@ -38,6 +38,8 @@
 				if(confirm('댓글을 수정 하시겠습니까?')) {
 					// 수정 데이터 전송
 					$(this).closest('form').submit();
+				}else{
+					$(this).parent().prev().val(comment);
 				}
 				
 				// 수정모드 해제
