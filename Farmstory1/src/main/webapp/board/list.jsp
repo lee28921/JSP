@@ -20,6 +20,9 @@
 	int currentPage = 1;
 	int total = 0; 
 	int lastPageNum = 0;
+	int pageGroupCurrent = 1;
+	int pageGroupStart = 1;
+	int pageGroupEnd = 0;
 	
 
 	// 현재 페이지 계산
@@ -31,7 +34,7 @@
 	start = (currentPage -1) * 10;
 	
 	// 전체 게시물 갯수 조회
-	total = dao.selectCountTotal();
+	total = dao.selectCountTotal(cate);
 
 	// 페이지 번호 계산
 	if(total % 10 == 0){
@@ -40,6 +43,18 @@
 		lastPageNum = (total / 10) + 1; 
 	}
 
+	// 페이지 그룹계산 - 페이지 네비게이션
+	pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
+
+		//그룹 시작 번호가 1, 11, 21 순으로 보이게 하기
+	pageGroupStart = (pageGroupCurrent - 1) * 10 + 1; 
+	
+		//그룹 마지막 번호가 10, 20, 30 순으로 보이게 하기
+	pageGroupEnd = pageGroupCurrent * 10;
+	
+	if(pageGroupEnd > lastPageNum){
+		pageGroupEnd = lastPageNum;
+	}
 	
 	// 글 조회
 	List<ArticleDTO> articles = dao.selectArticles(cate,start);
@@ -71,12 +86,17 @@
 			
 			    <!-- 페이지 네비게이션 -->
 			   <div class="paging">
-				   <a href="#" class="prev">이전</a>
-					<% for(int i=0; i<=total ; i++) { %>
+			   		<% if(pageGroupStart > 1) { %>
+			   		<a href="./list.jsp?pg=<%= pageGroupStart - 1 %>&group=<%= group %>&cate=<%= cate %>" class="prev">이전</a>
+			   		<% } %>
+			   		
+					<% for(int i=pageGroupStart; i<=pageGroupEnd; i++) { %>
 					<a href="./list.jsp?pg=<%= i %>&group=<%= group %>&cate=<%= cate %>" class="num <%= (currentPage == i)?"current":"" %>"><%= i %></a>
 					<% } %>
 			       
-			       <a href="#" class="next">다음</a>
+			       <% if(pageGroupEnd < lastPageNum){ %>
+			       <a href="./list.jsp?pg=<%= pageGroupEnd + 1 %>&group=<%= group %>&cate=<%= cate %>" class="next">다음</a>
+			       <% } %>
 			   </div>
 			
 			   <!-- 글쓰기 버튼 -->
