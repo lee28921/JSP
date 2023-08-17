@@ -1,39 +1,8 @@
 <%@page import="kr.co.jboard1.dao.UserDAO"%>
 <%@page import="kr.co.jboard1.dto.TermsDTO"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="javax.sql.DataSource"%>
-<%@page import="javax.naming.InitialContext"%>
-<%@page import="javax.naming.Context"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-TermsDTO dto = null;
-
-	try {
-		// JNDI 객체 서비스 생성
-		Context initCtx = new InitialContext();
-		Context ctx = (Context) initCtx.lookup("java:comp/env"); // JNDI 기본 환경 이름
-		
-		// 커넥션 풀에서 커넥션 가져오기
-		DataSource ds = (DataSource) ctx.lookup("jdbc/Jboard");
-		
-		Connection conn = ds.getConnection();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM `terms`");
-		
-		if(rs.next()){
-			dto = new TermsDTO();
-			dto.setTerms(rs.getString(1));
-			dto.setPrivacy(rs.getString(2));
-		}
-		rs.close();
-		stmt.close();
-		conn.close();
-		
-	} catch(Exception e){
-		e.printStackTrace();
-	}
+	TermsDTO dto = UserDAO.getInstance().selectTerms();
 %>
 <!DOCTYPE html>
 <html lang="en">

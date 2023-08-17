@@ -63,4 +63,7 @@ public class SQL {
 	public final static String UPDATE_COMMENT = "UPDATE `Article` SET `content`=? WHERE `no`=?";
 	
 	public final static String DELETE_COMMINT = "DELETE FROM `Article` WHERE `no`=?";
+	
+	// terms
+	public final static String SELECT_TERMS = "SELECT * FROM `terms`";
 }

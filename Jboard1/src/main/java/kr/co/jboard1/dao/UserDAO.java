@@ -2,6 +2,7 @@ package kr.co.jboard1.dao;
 
 import kr.co.jboard1.db.DBHelper;
 import kr.co.jboard1.db.SQL;
+import kr.co.jboard1.dto.TermsDTO;
 import kr.co.jboard1.dto.UserDTO;
 
 public class UserDAO extends DBHelper {
@@ -159,7 +160,27 @@ public class UserDAO extends DBHelper {
 		}
 		return result;
 	}
-	public void selectTerms() {}
+	public TermsDTO selectTerms() {
+		TermsDTO dto = null;
+
+		try {
+			// JNDI 객체 서비스 생성
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_TERMS);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				dto = new TermsDTO();
+				dto.setTerms(rs.getString(1));
+				dto.setPrivacy(rs.getString(2));
+			}
+			close();
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return dto;
+	}
 	
 	public void selectUsers() {}
 	public void updateUser() {}
