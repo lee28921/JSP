@@ -23,6 +23,7 @@
 	int pageGroupCurrent = 1;
 	int pageGroupStart = 1;
 	int pageGroupEnd = 0;
+	int pageStartNum = 0;
 	
 
 	// 현재 페이지 계산
@@ -56,6 +57,9 @@
 		pageGroupEnd = lastPageNum;
 	}
 	
+	// 페이지 시작번호 계산
+	pageStartNum = total - start;
+	
 	// 글 조회
 	List<ArticleDTO> articles = dao.selectArticles(cate,start);
 	
@@ -74,7 +78,7 @@
 			            </tr>
 			            <% for(ArticleDTO article : articles){ %>
 			            <tr>
-			                <td><%= article.getNo() %></td>
+			                <td><%= pageStartNum-- %></td>
 			                <td><a href="./view.jsp?group=<%= group %>&cate=<%= cate %>"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
 			                <td><%= article.getNick() %></td>
 			                <td><%= article.getRdate() %></td>
