@@ -51,6 +51,7 @@ public class ArticleDAO extends DBHelper {
 					dto.setWriter(rs.getString(9));
 					dto.setRegip(rs.getString(10));
 					dto.setRdate(rs.getString(11));
+					dto.setNick(rs.getString(12));
 					
 					articles.add(dto);
 				}
@@ -59,5 +60,26 @@ public class ArticleDAO extends DBHelper {
 				e.printStackTrace();
 			}
 			return articles;
+		}
+		
+		// 추가
+		public int selectCountTotal() { // 전체 게시물 갯수 조회
+
+			int total = 0;
+
+			try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
+			rs = psmt.executeQuery();
+
+			if(rs.next()) {
+				total = rs.getInt(1); // 게시물 갯수
+			}
+			close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return total;
 		}
 }

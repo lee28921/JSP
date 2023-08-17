@@ -36,4 +36,7 @@ public class SQL {
 												+ "WHERE `parent`=0 AND `cate`=?"
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
+	
+	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article`";
+	
 }

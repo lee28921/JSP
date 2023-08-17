@@ -10,12 +10,17 @@
 	String cate = request.getParameter("cate");
 	String pg = request.getParameter("pg");
 	
+	ArticleDAO dao = new ArticleDAO();
+	
 	// 목록 영역
 	pageContext.include("./_aside"+group+".jsp");
 	
 	// 페이지 관련 변수
 	int start = 0;
 	int currentPage = 1;
+	int total = 0; 
+	int lastPageNum = 0;
+	
 
 	// 현재 페이지 계산
 	if(pg != null){
@@ -24,10 +29,19 @@
 	}
 	// Limit 시작값 계산
 	start = (currentPage -1) * 10;
+	
+	// 전체 게시물 갯수 조회
+	total = dao.selectCountTotal();
+
+	// 페이지 번호 계산
+	if(total % 10 == 0){
+		lastPageNum = (total / 10);
+	}else{
+		lastPageNum = (total / 10) + 1; 
+	}
 
 	
 	// 글 조회
-	ArticleDAO dao = new ArticleDAO();
 	List<ArticleDTO> articles = dao.selectArticles(cate,start);
 	
 %>
@@ -57,9 +71,10 @@
 			
 			    <!-- 페이지 네비게이션 -->
 			   <div class="paging">
-			       <a href="#" class="prev">이전</a>
-			       
-			       <a href="#"></a>
+				   <a href="#" class="prev">이전</a>
+					<% for(int i=0; i<=total ; i++) { %>
+					<a href="./list.jsp?pg=<%= i %>&group=<%= group %>&cate=<%= cate %>" class="num <%= (currentPage == i)?"current":"" %>"><%= i %></a>
+					<% } %>
 			       
 			       <a href="#" class="next">다음</a>
 			   </div>
