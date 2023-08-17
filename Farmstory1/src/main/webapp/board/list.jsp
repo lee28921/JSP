@@ -1,11 +1,34 @@
+<%@page import="kr.farmstory1.dao.ArticleDAO"%>
+<%@page import="kr.farmstory.dto.ArticleDTO"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%
+	// 서브페이지, 카테고리
 	request.setCharacterEncoding("UTF-8");
 	String group = request.getParameter("group");
 	String cate = request.getParameter("cate");
+	String pg = request.getParameter("pg");
 	
+	// 목록 영역
 	pageContext.include("./_aside"+group+".jsp");
+	
+	// 페이지 관련 변수
+	int start = 0;
+	int currentPage = 1;
+
+	// 현재 페이지 계산
+	if(pg != null){
+		currentPage = Integer.parseInt(pg);
+		
+	}
+	// Limit 시작값 계산
+	start = (currentPage -1) * 10;
+
+	
+	// 글 조회
+	ArticleDAO dao = new ArticleDAO();
+	List<ArticleDTO> articles = dao.selectArticles(cate,start);
 	
 %>
 
@@ -20,13 +43,15 @@
 			                <th>날짜</th>
 			                <th>조회</th>
 			            </tr>
+			            <% for(ArticleDTO article : articles){ %>
 			            <tr>
-			                <td></td>
-			                <td><a href="./view.jsp?group=<%= group %>&cate=<%= cate %>">제목</a>&nbsp;[12]</td>
-			                <td>별명</td>
-			                <td>2023-11-11</td>
-			                <td>21</td>
+			                <td><%= article.getNo() %></td>
+			                <td><a href="./view.jsp?group=<%= group %>&cate=<%= cate %>"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
+			                <td><%= article.getNick() %></td>
+			                <td><%= article.getRdate() %></td>
+			                <td><%= article.getHit() %></td>
 			            </tr>
+			            <% } %>
 			        </table>
 			    </article>
 			

@@ -28,4 +28,12 @@ public class SQL {
 													+ "`writer`=?,"
 													+ "`regip`=?,"
 													+ "`rdate`=NOW()";
+	public final static String SELECT_ARTICLES = "SELECT "
+												+ "a.*, "
+												+ "b.`nick` "
+												+ "FROM `Article` AS a "
+												+ "JOIN `User` AS b ON a.writer = b.uid "
+												+ "WHERE `parent`=0 AND `cate`=?"
+												+ "ORDER BY `no` DESC "
+												+ "LIMIT ?, 10";
 }
