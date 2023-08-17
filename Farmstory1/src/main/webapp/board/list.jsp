@@ -4,10 +4,9 @@
 	request.setCharacterEncoding("UTF-8");
 	String group = request.getParameter("group");
 	
-	pageContext.include("./_asideCroptalk.jsp");
+	pageContext.include("./_aside"+group+".jsp");
 	
 %>
-
 
 			<section class="list">
 			    <h3>글목록</h3>
