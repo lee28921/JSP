@@ -19,4 +19,13 @@ public class SQL {
 														+ "`regip`=?, "
 														+ "`regDate`=NOW()";
 	public static final String SELECT_USER		= "SELECT * FROM `User` WHERE `uid`=? AND `pass`=?";
+	
+	// Article
+	public final static String INSERT_ARTICLE = "INSERT INTO `Article` SET "
+													+ "`cate`=?,"
+													+ "`title`=?,"
+													+ "`content`=?,"
+													+ "`writer`=?,"
+													+ "`regip`=?,"
+													+ "`rdate`=NOW()";
 }
