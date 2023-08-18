@@ -25,6 +25,7 @@
 <script>
 	$(function(){
 		
+		// 게시글 삭제
 		$('.btnDelete').click(function(){
 			
 			if(confirm('정말로 삭제하시겠습니까?')) {
@@ -33,6 +34,30 @@
 				return false;
 			}
 			return false;
+		});
+		
+		// 댓글 수정
+		$('.mod').click(function(e){
+			e.preventDefault();
+			
+			const txt = $(this).text();
+			
+			if(txt == '수정') {
+				$(this).parent().prev().addClass('modi');
+				$(this).parent().prev().attr('readonly',false);
+				$(this).parent().prev().focus();
+				$(this).text('수정완료');
+				$(this).prev().show();
+
+			} else {
+				$(this).closest('form').submit();
+				
+				$(this).parent().prev().removeClass('modi');
+				$(this).parent().prev().attr('readonly',true);
+				$(this).text('수정');
+				$(this).prev().hide();
+			}
+			
 		});
 		
 	});
@@ -71,9 +96,9 @@
         <h3>댓글목록</h3>
         <% for(ArticleDTO comment : comments){ %>
         <article class="comment">
-        <input type="hidden" name="no" value="<%= comment.getNo() %>">
-        <input type="hidden" name="parent" value="<%= comment.getParent() %>">
-        	<form action="#" method="post">
+	        <input type="hidden" name="no" value="<%= comment.getNo() %>">
+	        <input type="hidden" name="parent" value="<%= comment.getParent() %>">
+        	<form action="./proc/commentUpdate.jsp?group=<%= group %>&cate=<%= cate %>&no=<%= comment.getNo() %>&parent=<%= comment.getParent() %>" method="post">
              <span>
                  <span><%= comment.getNick() %></span>
                  <span><%= comment.getRdate() %></span>

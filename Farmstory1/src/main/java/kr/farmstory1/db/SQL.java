@@ -57,6 +57,7 @@ public class SQL {
 										+ "FROM `Article` AS a "
 										+ "JOIN `User` AS b ON a.writer = b.uid "
 										+ "WHERE `parent`=?";
+	public final static String UPDATE_COMMENT = "UPDATE `Article` SET `content`=? WHERE `no`=?";
 	public final static String DELETE_COMMENT = "DELETE FROM `Article` WHERE `no`=?";
 	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article`  WHERE `parent`=0 AND `cate`=?";
 	
