@@ -31,5 +31,5 @@
 	
 	UserDAO.getInstance().insertUser(dto);
 	
-	response.sendRedirect("/Jboard1/user/login.jsp");
+	response.sendRedirect("/Farmstory1");
 %>

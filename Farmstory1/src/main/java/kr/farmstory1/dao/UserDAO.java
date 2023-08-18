@@ -44,7 +44,7 @@ public class UserDAO extends DBHelper{
 		}
 	}
 	public UserDTO selectUser(String uid,String pass) {
-		UserDTO user = null;
+		UserDTO user = new UserDTO();
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_USER);
@@ -53,7 +53,6 @@ public class UserDAO extends DBHelper{
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				user = new UserDTO();
 				user.setUid(rs.getString(1));
 				user.setPass(rs.getString(2));
 				user.setName(rs.getString(3));
@@ -84,7 +83,7 @@ public class UserDAO extends DBHelper{
 	
 	// 추가
 	public TermsDTO selectTerms() {
-		TermsDTO dto = null;
+		TermsDTO dto = new TermsDTO();
 		
 		try {
 			conn = getConnection();
@@ -92,7 +91,6 @@ public class UserDAO extends DBHelper{
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
-				dto = new TermsDTO();
 				dto.setTerms(rs.getString(1));
 				dto.setPrivacy(rs.getString(2));
 			}
