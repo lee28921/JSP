@@ -5,21 +5,17 @@
 <%@ include file="./_header.jsp" %>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String group = request.getParameter("group");
 	String cate = request.getParameter("cate");
-	String no = request.getParameter("no");
 	
 	ArticleDAO dao = new ArticleDAO();
+	List<ArticleDTO> latests1 = dao.selectLatests("grow",5);
+	List<ArticleDTO> latests2 = dao.selectLatests("school",5);
+	List<ArticleDTO> latests3 = dao.selectLatests("story",5);
 	
-	// 페이지 관련 변수
-	int start = 0;
-	int currentPage = 1;
-	int total = 0; 
-	int lastPageNum = 0;
+	List<ArticleDTO> tabLatests1 = dao.selectLatests("notice",3);
+	List<ArticleDTO> tabLatests2 = dao.selectLatests("qna",3);
+	List<ArticleDTO> tabLatests3 = dao.selectLatests("faq",3);
 	
-	
-	
-	List<ArticleDTO> articles = dao.selectArticles(cate, start);
 %>
 <main>
     <div class="slider">
@@ -48,11 +44,11 @@
             <a href="#"><img src="./images/main_latest1_tit.png" alt="텃밭 가꾸기"/></a>
             <img src="./images/main_latest1_img.jpg" alt="이미지"/>
             <table border="0">
-            	<% for(ArticleDTO article : articles) { %>
+            	<% for(ArticleDTO latest : latests1) { %>
                 <tr>
                     <td>></td>
-                    <td><a href="/Farmstory1/board/list.jsp?group=<%= group %>&cate=<%= cate %>&no<%= no %>"><%= article.getTitle() %></a></td>
-                    <td><%= article.getRdate() %></td>
+                    <td><a href="/Farmstory1/board/view.jsp?group=Croptalk&cate=story&no=<%= latest.getNo() %>"><%= latest.getTitle() %></a></td>
+                    <td><%= latest.getRdate() %></td>
                 </tr>
                 <% } %>
             </table>
@@ -61,62 +57,26 @@
             <a href="#"><img src="./images/main_latest2_tit.png" alt="귀농학교"/></a>
             <img src="./images/main_latest2_img.jpg" alt="이미지"/>
             <table border="0">
+                <% for(ArticleDTO latest : latests2) { %>
                 <tr>
                     <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
+                    <td><a href="/Farmstory1/board/view.jsp?group=Croptalk&cate=story&no=<%= latest.getNo() %>"><%= latest.getTitle() %></a></td>
+                    <td><%= latest.getRdate() %></td>
                 </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
+                <% } %>
             </table>
         </div>
         <div>
             <a href="#"><img src="./images/main_latest3_tit.png" alt="농작물 이야기"/></a>
             <img src="./images/main_latest3_img.jpg" alt="이미지"/>
             <table border="0">
+                <% for(ArticleDTO latest : latests3) { %>
                 <tr>
                     <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
+                    <td><a href="/Farmstory1/board/view.jsp?group=Croptalk&cate=story&no=<%= latest.getNo() %>"><%= latest.getTitle() %></a></td>
+                    <td><%= latest.getRdate() %></td>
                 </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
+                <% } %>
             </table>
         </div>
         
@@ -159,23 +119,23 @@
                 </ul>
                 <div id="tabs-1">
                     <ul class="txt">
-                        <li><a href="#">· 홈페이지 오픈 기념 이벤트를 진행합니다.</a></li>
-                        <li><a href="#">· 홈페이지 오픈 기념 이벤트를 진행합니다.</a></li>
-                        <li><a href="#">· 홈페이지 오픈 기념 이벤트를 진행합니다.</a></li>
+                    	<% for (ArticleDTO tabLastet : tabLatests1) { %>
+                        <li><a href="./board/view.jsp?group=Community&cate=notice&no=<%= tabLastet.getNo() %>"><%= tabLastet.getTitle() %></a></li>
+                        <% } %>
                     </ul>
                 </div>
                 <div id="tabs-2">
                     <ul class="txt">
-                        <li><a href="#">· 홈페이지 이용 관련 불편사항을 들려주세요.</a></li>
-                        <li><a href="#">· 홈페이지 이용 관련 불편사항을 들려주세요.</a></li>
-                        <li><a href="#">· 홈페이지 이용 관련 불편사항을 들려주세요.</a></li>
+                        <% for (ArticleDTO tabLastet : tabLatests2) { %>
+                        <li><a href="./board/view.jsp?group=Community&cate=qna&no=<%= tabLastet.getNo() %>"><%= tabLastet.getTitle() %></a></li>
+                        <% } %>
                     </ul>
                 </div>
                 <div id="tabs-3">
                     <ul class="txt">
-                        <li><a href="#">· 홈페이지를 오픈하였습니다.</a></li>
-                        <li><a href="#">· 홈페이지를 오픈하였습니다.</a></li>
-                        <li><a href="#">· 홈페이지를 오픈하였습니다.</a></li>
+                        <% for (ArticleDTO tabLastet : tabLatests3) { %>
+                        <li><a href="./board/view.jsp?group=Community&cate=faq&no=<%= tabLastet.getNo() %>"><%= tabLastet.getTitle() %></a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
