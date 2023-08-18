@@ -45,6 +45,7 @@ public class SQL {
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
 	public final static String UPDATE_ARTICLE = "UPDATE `Article` SET `title`=?, `Content`=? WHERE `no`=?";
+	public final static String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?";
 	
 	public final static String SELECT_COMMENTS = "SELECT "
 										+ "a.*,"

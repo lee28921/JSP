@@ -22,6 +22,21 @@
 	pageContext.include("./_aside"+group+".jsp");
 	
 %>
+<script>
+	$(function(){
+		
+		$('.btnDelete').click(function(){
+			
+			if(confirm('정말로 삭제하시겠습니까?')) {
+				return true;
+			} else {
+				return false;
+			}
+			return false;
+		});
+		
+	});
+</script>
 <section class="view">
     <h3>글보기</h3>
     <table>
@@ -46,7 +61,7 @@
         </tr>
     </table>
     <div>
-        <a href="#" class="btnDelete">삭제</a>
+        <a href="./delete.jsp?group=<%= group %>&cate=<%= cate %>&no=<%= no %>" class="btnDelete">삭제</a>
         <a href="./modify.jsp?group=<%= group %>&cate=<%= cate %>&no=<%= no %>" class="btnModify">수정</a>
         <a href="./list.jsp?group=<%= group %>&cate=<%= cate %>" class="btnList">목록</a>
     </div>

@@ -108,6 +108,22 @@ public class ArticleDAO extends DBHelper {
 			}
 		}
 		
+		public void deleteArticle(String no) {
+			try {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
+				psmt.setString(1, no);
+				psmt.setString(2, no);
+				
+				psmt.executeUpdate();
+				
+				close();
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		// 추가
 		public int selectCountTotal(String cate) { // 전체 게시물 갯수 조회
 
