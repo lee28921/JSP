@@ -84,7 +84,7 @@ public class ArticleDAO extends DBHelper {
 					
 					articles.add(dto);
 				}
-				
+				close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -190,7 +190,7 @@ public class ArticleDAO extends DBHelper {
 					
 					articles.add(dto);
 				}
-				
+				close();
 				
 			} catch (Exception e) {
 				e.printStackTrace();
