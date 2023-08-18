@@ -198,6 +198,21 @@ public class ArticleDAO extends DBHelper {
 			return articles;
 		}
 
+		public void deleteComment(String no) {
+			try {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.DELETE_COMMENT);
+				psmt.setString(1, no);
+				psmt.executeUpdate();
+				
+				close();
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
 		public List<ArticleDTO> selectLatests(String cate, int size) {
 			
 			List<ArticleDTO> latests = new ArrayList<>();

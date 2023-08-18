@@ -71,8 +71,8 @@
         <h3>댓글목록</h3>
         <% for(ArticleDTO comment : comments){ %>
         <article class="comment">
-        <input type="hidden" name="no" value="">
-        <input type="hidden" name="parent" value="">
+        <input type="hidden" name="no" value="<%= comment.getNo() %>">
+        <input type="hidden" name="parent" value="<%= comment.getParent() %>">
         	<form action="#" method="post">
              <span>
                  <span><%= comment.getNick() %></span>
@@ -81,7 +81,7 @@
              <textarea name="comment" readonly><%= comment.getContent() %></textarea>
              <% if(sessUser.getUid().equals(comment.getWriter())){ %>
              <div>
-                 <a href="#" class="del">삭제</a>
+                 <a href="./proc/commentDelete.jsp?group=<%= group %>&cate=<%= cate %>&no=<%= comment.getNo() %>&parent=<%= comment.getParent() %>" class="del">삭제</a>
                  <a href="#" class="can">취소</a>
                  <a href="#" class="mod">수정</a>
              </div>
