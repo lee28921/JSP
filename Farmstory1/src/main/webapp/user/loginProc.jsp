@@ -22,7 +22,7 @@
 			if(target.equals("write")) {
 				response.sendRedirect("/Farmstory1/board/write.jsp?group="+group+"&cate="+cate);
 			} else if(target.equals("view")) {
-				response.sendRedirect("/Farmstory1/board/view.js?group="+group+"&no="+no);
+				response.sendRedirect("/Farmstory1/board/view.jsp?group="+group+"&cate="+cate+"&no="+no);
 			}
 			
 		} else {

@@ -9,17 +9,18 @@
 	String cate = request.getParameter("cate");
 	String no = request.getParameter("no");
 	
-	pageContext.include("./_aside"+group+".jsp");
+	if(sessUser == null){
+		response.sendRedirect("/Farmstory1/user/login.jsp?success=101&target=view&group="+group+"&cate="+cate+"&no="+no);
+		return;
+	}
 	
 	ArticleDAO dao = new ArticleDAO();
 	
 	ArticleDTO dto = dao.selectArticle(no);
 	List<ArticleDTO> comments = dao.selectComments(no);
 	
-	if(sessUser == null){
-		response.sendRedirect("/Farmstory1/user/login.jsp?success=101&target=view&group="+group+"&cate="+cate+"&no="+no);
-		return;
-	}
+	pageContext.include("./_aside"+group+".jsp");
+	
 %>
 <section class="view">
     <h3>글보기</h3>
