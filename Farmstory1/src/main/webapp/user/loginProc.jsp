@@ -14,6 +14,6 @@
 		session.setAttribute("sessUser", user);
 		response.sendRedirect("/Farmstory1");
 	} else {
-		response.sendRedirect("/Farmstory1");
+		response.sendRedirect("/Farmstory1/user/login.jsp?success=100");
 	}
 %>
