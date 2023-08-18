@@ -12,6 +12,11 @@
 	
 	ArticleDAO dao = new ArticleDAO();
 	ArticleDTO dto = dao.selectArticle(no);
+	
+	if(sessUser == null){
+		response.sendRedirect("/Farmstory1/user/login.jsp?success=101&target=view&group="+group+"&cate="+cate+"&no="+no);
+		return;
+	}
 %>
 <section class="view">
     <h3>글보기</h3>
