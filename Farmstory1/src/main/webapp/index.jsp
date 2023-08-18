@@ -1,5 +1,26 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.farmstory.dto.ArticleDTO"%>
+<%@page import="kr.farmstory1.dao.ArticleDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String group = request.getParameter("group");
+	String cate = request.getParameter("cate");
+	String no = request.getParameter("no");
+	
+	ArticleDAO dao = new ArticleDAO();
+	
+	// 페이지 관련 변수
+	int start = 0;
+	int currentPage = 1;
+	int total = 0; 
+	int lastPageNum = 0;
+	
+	
+	
+	List<ArticleDTO> articles = dao.selectArticles(cate, start);
+%>
 <main>
     <div class="slider">
         <ul>
@@ -27,31 +48,13 @@
             <a href="#"><img src="./images/main_latest1_tit.png" alt="텃밭 가꾸기"/></a>
             <img src="./images/main_latest1_img.jpg" alt="이미지"/>
             <table border="0">
+            	<% for(ArticleDTO article : articles) { %>
                 <tr>
                     <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
+                    <td><a href="/Farmstory1/board/list.jsp?group=<%= group %>&cate=<%= cate %>&no<%= no %>"><%= article.getTitle() %></a></td>
+                    <td><%= article.getRdate() %></td>
                 </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                    <td>20-12-22</td>
-                </tr>
+                <% } %>
             </table>
         </div>
         <div>
