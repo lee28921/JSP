@@ -1,14 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
 <main>
-    <aside>
-        <h3>주요기능</h3>
-        <ul>
-            <li class="on"><a href="#">상품관리</a></li>
-            <li><a href="#">주문관리</a></li>
-            <li><a href="#">회원관리</a></li>                    
-        </ul>
-    </aside>
+    <%@ include file="./_aside.jsp" %>
     <section id="productList">
         <nav>
             <h3>상품목록</h3>
@@ -41,7 +34,7 @@
 
             <p>
                 <a href="#" class="productDelete">선택삭제</a>
-                <a href="./productRegister.html" class="productRegister">상품등록</a>
+                <a href="./productRegister.jsp" class="productRegister">상품등록</a>
             </p>
             
             <p class="paging">

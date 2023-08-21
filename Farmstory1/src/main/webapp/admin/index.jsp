@@ -1,14 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
 <main>
-    <aside>
-        <h3>주요기능</h3>
-        <ul>
-            <li><a href="./productList.jsp">상품관리</a></li>
-            <li><a href="./orderList.jsp">주문관리</a></li>
-            <li><a href="./userList.jsp">회원관리</a></li>                    
-        </ul>
-    </aside>
+    <%@ include file="./_aside.jsp" %>
     <section>
         <nav>
             <h3>관리자 메인</h3>
