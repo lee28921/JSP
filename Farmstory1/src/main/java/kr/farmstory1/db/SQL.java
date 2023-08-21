@@ -61,4 +61,17 @@ public class SQL {
 	public final static String DELETE_COMMENT = "DELETE FROM `Article` WHERE `no`=?";
 	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article`  WHERE `parent`=0 AND `cate`=?";
 	
+	// Product
+	public final static String INSERT_PRODUCT = "INSERT INTO `Product` SET "
+													+ "`type`=?, "
+													+ "`pName`=?, "
+													+ "`price`=?, "
+													+ "`delivery`=?, "
+													+ "`stock`=?, "
+													+ "`thumb1`=?, "
+													+ "`thumb2`=?, "
+													+ "`thumb3`=?, "
+													+ "`seller`=?, "
+													+ "`etc`=?, "
+													+ "`rdate`=NOW() ";
 }
