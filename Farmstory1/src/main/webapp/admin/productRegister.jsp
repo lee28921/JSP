@@ -8,7 +8,7 @@
         </nav>
 
         <article>
-            <form action="./proc/productRegister.jsp" method="post">
+            <form action="./proc/productRegister.jsp" method="post" enctype="multipart/form-data">
   				<input type="hidden" name="seller" value="<%= sessUser.getUid() %>">
                 <table border="0">
                     <tr>
