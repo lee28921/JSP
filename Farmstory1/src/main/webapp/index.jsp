@@ -4,9 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
 <%
-	request.setCharacterEncoding("UTF-8");
-	String cate = request.getParameter("cate");
-	
 	ArticleDAO dao = new ArticleDAO();
 	List<ArticleDTO> latests1 = dao.selectLatests("grow",5);
 	List<ArticleDTO> latests2 = dao.selectLatests("school",5);

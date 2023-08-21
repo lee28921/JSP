@@ -51,7 +51,7 @@
                 <% if(sessUser == null){ %>
                 <a href="/Farmstory1/user/login.jsp">로그인 |</a>
                 <a href="/Farmstory1/user/terms.jsp">회원가입 |</a>
-                <%}else{ %>
+                <% }else{ %>
                 <a href="/Farmstory1/user/logout.jsp">로그아웃 |</a>
                 	<% if(!sessUser.getRole().equals("USER")){ %>
                 	<a href="/Farmstory1/admin/">관리자 |</a>
