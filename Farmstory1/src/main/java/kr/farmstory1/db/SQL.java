@@ -75,5 +75,8 @@ public class SQL {
 													+ "`etc`=?, "
 													+ "`rdate`=NOW() ";
 	
-	public final static String SELECT_PRODUCTS = "SELECT * FROM `Product` WHERE `stock` > 0";
+	public final static String SELECT_PRODUCTS_ALL = "SELECT * FROM `Product` WHERE `stock` > 0";
+	public final static String SELECT_PRODUCTS_TYPE = "SELECT * FROM `Product` WHERE `stock` > 0 AND `type`=?";
+	public final static String SELECT_COUNT_PRODUCT_TOTAL = "SELECT COUNT(*) FROM `Product` WHERE `stock` > 0";
+
 }

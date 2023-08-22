@@ -4,10 +4,18 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%
+	request.setCharacterEncoding("UTF-8");
+	String type = request.getParameter("type");
+
+	if(type == null){
+		type = "0";
+	}
+	
 	ProductDAO dao = new ProductDAO();
-	List<ProductDTO> products = dao.selectProducts();
 	
+	int total = dao.selectCountProductsTotal();
 	
+	List<ProductDTO> products = dao.selectProducts(type);
 %>
 <div id="sub">
     <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
@@ -29,10 +37,10 @@
 
             <!-- 내용 시작 -->
             <p class="sort">
-                <a href="#" class="on">전체(10) |</a>
-                <a href="#">과일 |</a>
-                <a href="#">야채 |</a>
-                <a href="#">곡류</a>
+                <a href="./list.jsp?type=0" class="<%= type.equals("0")? "on":"" %>">전체(<%= total %>) |</a>
+                <a href="./list.jsp?type=1" class="<%= type.equals("1")? "on":"" %>">과일 |</a>
+                <a href="./list.jsp?type=2" class="<%= type.equals("2")? "on":"" %>">야채 |</a>
+                <a href="./list.jsp?type=3" class="<%= type.equals("3")? "on":"" %>">곡류</a>
             </p>
             <table border="0">
             	<% for(ProductDTO product : products){ %>
@@ -56,15 +64,15 @@
                 <% } %>
             </table>
 
-            <p class="paging">
-                <a href="#"><</a>
+            <div class="paging">
+                <a href="#" class=""><</a>
                 <a href="#" class="on">[1]</a>
                 <a href="#">[2]</a>
                 <a href="#">[3]</a>
                 <a href="#">[4]</a>
                 <a href="#">[5]</a>
                 <a href="#">></a>
-            </p>
+            </div>
 
             <!-- 내용 끝 -->
 
