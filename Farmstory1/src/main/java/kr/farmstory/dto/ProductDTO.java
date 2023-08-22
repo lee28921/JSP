@@ -125,6 +125,9 @@ public class ProductDTO {
 		this.etc = etc;
 	}
 	public String getRdate() {
+		return rdate.substring(2,10); // 년,월,일만 보이게
+	}
+	public String getFullRdate() {
 		return rdate;
 	}
 	public void setRdate(String rdate) {
