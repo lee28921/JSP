@@ -36,7 +36,7 @@ public class ProductDAO extends DBHelper{
 	public ProductDTO selectProduct(int pNo) {
 		return null;
 	}
-	public List<ProductDTO> selectProducts(String type) {
+	public List<ProductDTO> selectProducts(String type,int start) {
 		
 		List<ProductDTO> products = new ArrayList<>();
 		
@@ -44,9 +44,11 @@ public class ProductDAO extends DBHelper{
 			conn = getConnection();
 			if(type.equals("0")) {
 				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL);
+				psmt.setInt(1, start);
 			} else {
 				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_TYPE);
 				psmt.setString(1, type);
+				psmt.setInt(2, start);
 			}
 			rs = psmt.executeQuery();
 			
@@ -80,12 +82,17 @@ public class ProductDAO extends DBHelper{
 	public void deleteProduct(int pNo) {}
 	
 	// 추가
-	public int selectCountProductsTotal() {
+	public int selectCountProductsTotal(String type) {
 		int total = 0;
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCT_TOTAL);
+			if(type.equals("0")) {
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCT_ALL);
+			} else {
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCT_TYPE);
+				psmt.setString(1, type);
+			}
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {

@@ -6,16 +6,43 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String type = request.getParameter("type");
-
-	if(type == null){
-		type = "0";
-	}
+	String pg = request.getParameter("pg");
 	
 	ProductDAO dao = new ProductDAO();
 	
-	int total = dao.selectCountProductsTotal();
+	// 페이지 관련 변수
+	int start = 0;
+	int currentPage = 1;
+	int total = dao.selectCountProductsTotal(type);
+	int lastPageNum = 0;
+	int pageGroupCurrent = 1;
+	int pageGroupStart = 1;
+	int pageGroupEnd = 0;
 	
-	List<ProductDTO> products = dao.selectProducts(type);
+	if(pg != null){
+		currentPage = Integer.parseInt(pg);
+	}
+	
+	// 페이지 번호 계산
+	if(total % 10 == 0){
+		lastPageNum = (total / 10);
+	}else{
+		lastPageNum = (total / 10) + 1; 
+	}
+	
+	// 페이지 그룹계산 - 페이지 네비게이션
+	pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
+	pageGroupStart = (pageGroupCurrent - 1) * 10 + 1; 
+	pageGroupEnd = pageGroupCurrent * 10;
+	
+	if(pageGroupEnd > lastPageNum){ 
+		pageGroupEnd = lastPageNum; 
+	}
+	
+	List<ProductDTO> products = dao.selectProducts(type,start);
+	
+	
+	
 %>
 <div id="sub">
     <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
@@ -37,10 +64,10 @@
 
             <!-- 내용 시작 -->
             <p class="sort">
-                <a href="./list.jsp?type=0" class="<%= type.equals("0")? "on":"" %>">전체(<%= total %>) |</a>
-                <a href="./list.jsp?type=1" class="<%= type.equals("1")? "on":"" %>">과일 |</a>
-                <a href="./list.jsp?type=2" class="<%= type.equals("2")? "on":"" %>">야채 |</a>
-                <a href="./list.jsp?type=3" class="<%= type.equals("3")? "on":"" %>">곡류</a>
+                <a href="./list.jsp?type=0" class="<%= type.equals("0")? "on":"" %>">전체 <%= type.equals("0")?"("+total+")":"" %> |</a>
+                <a href="./list.jsp?type=1" class="<%= type.equals("1")? "on":"" %>">과일 <%= type.equals("1")?"("+total+")":"" %> |</a>
+                <a href="./list.jsp?type=2" class="<%= type.equals("2")? "on":"" %>">야채 <%= type.equals("2")?"("+total+")":"" %> |</a>
+                <a href="./list.jsp?type=3" class="<%= type.equals("3")? "on":"" %>">곡류 <%= type.equals("3")?"("+total+")":"" %> </a>
             </p>
             <table border="0">
             	<% for(ProductDTO product : products){ %>
@@ -65,13 +92,15 @@
             </table>
 
             <div class="paging">
-                <a href="#" class=""><</a>
-                <a href="#" class="on">[1]</a>
-                <a href="#">[2]</a>
-                <a href="#">[3]</a>
-                <a href="#">[4]</a>
-                <a href="#">[5]</a>
-                <a href="#">></a>
+            	<% if(pageGroupStart > 1) { %>
+                <a href="./list.jsp?type=<%= type %>&pg=<%= pageGroupStart - 1  %>" class="prev"><</a>
+                <% } %>
+                <% for(int i=pageGroupStart; i<=pageGroupEnd ; i++) { %>
+                <a href="./list.jsp?type=<%= type %>&pg=<%= i %>" class="num <%= (currentPage == i)?"on":"" %>">[<%= i %>]</a>
+                <% } %>
+                <% if(pageGroupEnd < lastPageNum){ %>
+                <a href="./list.jsp?type=<%= type %>&pg=<%= pageGroupEnd +1 %>" class="next">></a>
+                <% } %>
             </div>
 
             <!-- 내용 끝 -->
