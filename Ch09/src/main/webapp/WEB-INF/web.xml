@@ -48,4 +48,9 @@
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   
+  <!-- 리스너 등록 -->
+  <listener>
+  	<listener-class>sub3.MyContextListener</listener-class>
+  </listener>
+  
 </web-app>
