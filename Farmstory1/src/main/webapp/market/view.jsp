@@ -16,10 +16,10 @@
 		
 		$('input[name=count]').change(function(){
 			
-			let cnt = $(this).val();
+			let cnt = $(this).val(); // count 값 불러오기
 			let total = price * cnt;
 			
-			$('.total').text(total.toLocaleString()+'원');
+			$('.total').text(total.toLocaleString()+'원'); // 천 단위 , 찍기
 			
 			
 			
@@ -63,10 +63,10 @@
                         <td>
                         	<% if(dto.getDelivery() > 0) { %>
                             <span><%= dto.getDelivery() %></span>원
+                            <em>3만원 이상 무료배송</em>
                             <% } else { %>
                             <span>배송비 무료</span>
                             <% } %>
-                            <em>3만원 이상 무료배송</em>
                         </td>
                     </tr>
                     <tr>
