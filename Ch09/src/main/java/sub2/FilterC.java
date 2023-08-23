@@ -9,7 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter("/hello.do")
+@WebFilter("/hello.do") // 해당 주소에만 요청
 public class FilterC implements Filter{
 
 	@Override

@@ -22,7 +22,7 @@
 		<h3>3.리스너</h3>
 		
 		<h4>세션리스너 실습</h4>
-		<% if(!success.equals("200")){ %>
+		<% if(success == null || !success.equals("200")){ %>
 		<form action="/Ch09/hello.do" method="post">
 			<input type="text" name="uid"/> <br/>
 			<input type="password" name="pass"/> <br/>

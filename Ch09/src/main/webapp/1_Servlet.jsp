@@ -20,6 +20,6 @@
 		
 		<a href="/Ch09/hello.do">HelloServlet</a>
 		<a href="/Ch09/welcome.do">WelcomeServlet</a>
-		<a href="/Ch09/Greeting.do">GreetingServlet</a>
+		<a href="/Ch09/greeting.do">GreetingServlet</a>
 	</body>
 </html>

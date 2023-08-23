@@ -9,7 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter(urlPatterns = {"/welcome.do","/greeting.do"})
+@WebFilter(urlPatterns = {"/welcome.do","/greeting.do"}) // 두 주소에만 요청
 public class FilterD implements Filter{
 
 	@Override
