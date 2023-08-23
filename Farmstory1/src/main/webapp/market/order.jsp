@@ -18,6 +18,24 @@
 	String total = request.getParameter("total");
 	String finalPrice = request.getParameter("final");
 %>
+<script>
+	$(function(){
+		$('#btnBuy').click(function(e){
+			e.preventDefault();
+			$('#formOrder').submit();
+			
+		});
+		
+		$('#btnShopping').click(function(){
+			e.preventDefault();
+			
+			if(confirm("주문을 취소하시겠습니까?")){
+				location.href='/Farmstory1/market/list.jsp';
+			}
+		});
+		
+	});
+</script>
 <div id="sub">
     <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
     <section class="market">
@@ -70,30 +88,38 @@
             </div>
             <h3>주문정보 입력</h3>
             <div class="shipping">
-                <table>
-                    <tr>
-                        <td>받는분</td>
-                        <td><input type="text" name="receiver"></td>
-                    </tr>
-                    <tr>
-                        <td>휴대폰</td>
-                        <td><input type="text" name="hp"></td>
-                    </tr>
-                    <tr>
-                        <td>배송주소</td>
-                        <td>
-                            <input type="text" name="zip" readonly><button id="btnZip">우편번호 검색</button>
-                            <input type="text" name="addr1" placeholder="기본주소 검색">
-                            <input type="text" name="addr2" placeholder="상세주소 입력">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>기타</td>
-                        <td>
-                            <textarea name="etc"></textarea>
-                        </td>
-                    </tr>
-                </table>
+            	<form id="formOrder" action="/Farmstory1/market/proc/orderProc.jsp" method="post">
+            		<input type="hidden" name="pNo" value="<%= pNo %>">
+            		<input type="hidden" name="count" value="<%= count %>">
+            		<input type="hidden" name="delivery" value="<%= delivery %>">
+            		<input type="hidden" name="price" value="<%= price %>">
+            		<input type="hidden" name="total" value="<%= finalPrice %>">
+            		<input type="hidden" name="uid" value="<%= sessUser.getUid() %>">
+	                <table>
+	                    <tr>
+	                        <td>받는분</td>
+	                        <td><input type="text" name="buyer" value="<%= sessUser.getName() %>"></td>
+	                    </tr>
+	                    <tr>
+	                        <td>휴대폰</td>
+	                        <td><input type="text" name="hp" value="<%= sessUser.getHp() %>"></td>
+	                    </tr>
+	                    <tr>
+	                        <td>배송주소</td>
+	                        <td>
+	                            <input type="text" name="zip" readonly value="<%= sessUser.getZip() %>"><button id="btnZip">우편번호 검색</button>
+	                            <input type="text" name="addr1" placeholder="기본주소 검색" value="<%= sessUser.getAddr1() %>">
+	                            <input type="text" name="addr2" placeholder="상세주소 입력" value="<%= sessUser.getAddr2() %>">
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>기타</td>
+	                        <td>
+	                            <textarea name="etc"></textarea>
+	                        </td>
+	                    </tr>
+	                </table>
+	        	</form>
             </div>
 
             <p>
