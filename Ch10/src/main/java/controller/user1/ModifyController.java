@@ -3,7 +3,6 @@ package controller.user1;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,25 +12,28 @@ import javax.servlet.http.HttpServletResponse;
 import dto.User1DTO;
 import service.User1Service;
 
-@WebServlet("/user1/register.do")
-public class RegisterController extends HttpServlet {
+@WebServlet("/user1/modify.do")
+public class ModifyController extends HttpServlet{
 
-	private static final long serialVersionUID = 6248718573801206490L;
+	private static final long serialVersionUID = -5004230667653103488L;
 	
 	private User1Service service = new User1Service();
 	
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-
-	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user1/register.jsp");
+		String uid = req.getParameter("uid");
+		
+		User1DTO user = service.selectUser1(uid);
+		
+		req.setAttribute("user", user);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user1/modify.jsp");
 		dispatcher.forward(req, resp);
+		
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -46,10 +48,8 @@ public class RegisterController extends HttpServlet {
 		dto.setHp(hp);
 		dto.setAge(age);
 		
-		service.insertUser1(dto);
+		service.updateUser1(dto);
 		
 		resp.sendRedirect("/Ch10/user1/list.do");
-	
 	}
-
 }
