@@ -19,7 +19,7 @@ public class GreetingController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/greeting.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/greeting.jsp");
 		dispatcher.forward(request, response);
 	}
 
