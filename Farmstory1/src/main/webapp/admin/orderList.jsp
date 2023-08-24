@@ -1,3 +1,4 @@
+<%@page import="kr.farmstory1.db.Utils"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.farmstory.dto.OrderDTO"%>
 <%@page import="kr.farmstory1.dao.OrderDAO"%>
@@ -105,11 +106,11 @@
 	                <tr>
 	                    <td class="chk"><input type="checkbox" name="chk" value="<%= order.getOrderNo() %>"/></td>
 	                    <td class="orderNo"><%= order.getOrderNo() %></td>
-	                    <td class="pName"><%= order.getpName() %></td>                            
-	                    <td class="price"><%= order.getOrderPrice() %>원</td>
+	                    <td class="pName"><%= Utils.ellipsis(order.getpName(),5) %></td>                            
+	                    <td class="price"><%=  Utils.comma(order.getOrderPrice()) %>원</td>
 	                    <td class="count"><%= order.getOrderCount() %></td>
-	                    <td class="delivery"><%= order.getOrderDelivery() %>원</td>
-	                    <td class="total"><%= order.getOrderTotal() %>원</td>
+	                    <td class="delivery"><%= Utils.comma(order.getOrderDelivery()) %>원</td>
+	                    <td class="total"><%= Utils.comma(order.getOrderTotal()) %>원</td>
 	                    <td class="orderer"><%= order.getOrderUser() %></td>
 	                    <td class="date"><%= order.getOrderDate() %></td>
 	                    <td><a href="#" class="showPopup">[상세확인]</a></td>
@@ -173,7 +174,7 @@
                 </tr>
                 <tr>
                     <td>합계</td>
-                    <td class=".total">11,000원</td>
+                    <td class="total">11,000원</td>
                 </tr>
                 <tr>
                     <td>주문자</td>
