@@ -70,6 +70,13 @@
 			}
 			
 		});
+		
+		$('.orderDelete').click(function(e){
+			e.preventDefault();
+			
+			$('#formCheck').submit();
+		});
+		
 	});
 </script>
 <main>
@@ -80,39 +87,40 @@
         </nav>
 
         <article>
-
-            <table border="0">
-                <tr>
-                    <th><input type="checkbox" name="all"/></th>
-                    <th>주문번호</th>
-                    <th>상품명</th>
-                    <th>판매가격</th>
-                    <th>수량</th>
-                    <th>배송비</th>
-                    <th>합계</th>
-                    <th>주문자</th>
-                    <th>주문일</th>
-                    <th>확인</th>
-                </tr>
-                <% for(OrderDTO order : orders){ %>
-                <tr>
-                    <td class="chk"><input type="checkbox" name="chk"/></td>
-                    <td class="orderNo"><%= order.getOrderNo() %></td>
-                    <td class="pName"><%= order.getpName() %></td>                            
-                    <td class="price"><%= order.getOrderPrice() %>원</td>
-                    <td class="count"><%= order.getOrderCount() %></td>
-                    <td class="delivery"><%= order.getOrderDelivery() %>원</td>
-                    <td class="total"><%= order.getOrderTotal() %>원</td>
-                    <td class="orderer"><%= order.getReceiver() %></td>
-                    <td class="date"><%= order.getOrderDate() %></td>
-                    <td><a href="#" class="showPopup">[상세확인]</a></td>
-                    <td class="hidden orderProduct"><%= order.getOrderProduct() %></td>
-                    <td class="hidden thumb1"><%= order.getThumb1() %></td>
-                    <td class="hidden receiver"><%= order.getReceiver() %></td>
-                    <td class="hidden address"><%= order.getAddr1() +" "+ order.getAddr2() %></td>
-                </tr>
-                <% } %>
-            </table>
+			<form id="formCheck" action="./proc/deleteOrders.jsp" method="get">
+	            <table border="0">
+	                <tr>
+	                    <th><input type="checkbox" name="all"/></th>
+	                    <th>주문번호</th>
+	                    <th>상품명</th>
+	                    <th>판매가격</th>
+	                    <th>수량</th>
+	                    <th>배송비</th>
+	                    <th>합계</th>
+	                    <th>주문자</th>
+	                    <th>주문일</th>
+	                    <th>확인</th>
+	                </tr>
+	                <% for(OrderDTO order : orders){ %>
+	                <tr>
+	                    <td class="chk"><input type="checkbox" name="chk" value="<%= order.getOrderNo() %>"/></td>
+	                    <td class="orderNo"><%= order.getOrderNo() %></td>
+	                    <td class="pName"><%= order.getpName() %></td>                            
+	                    <td class="price"><%= order.getOrderPrice() %>원</td>
+	                    <td class="count"><%= order.getOrderCount() %></td>
+	                    <td class="delivery"><%= order.getOrderDelivery() %>원</td>
+	                    <td class="total"><%= order.getOrderTotal() %>원</td>
+	                    <td class="orderer"><%= order.getOrderUser() %></td>
+	                    <td class="date"><%= order.getOrderDate() %></td>
+	                    <td><a href="#" class="showPopup">[상세확인]</a></td>
+	                    <td class="hidden orderProduct"><%= order.getOrderProduct() %></td>
+	                    <td class="hidden thumb1"><%= order.getThumb1() %></td>
+	                    <td class="hidden receiver"><%= order.getReceiver() %></td>
+	                    <td class="hidden address"><%= order.getAddr1() +" "+ order.getAddr2() %></td>
+	                </tr>
+	                <% } %>
+	            </table>
+			</form>
 
             <p>
                 <a href="#" class="orderDelete">선택삭제</a>                        
@@ -177,7 +185,7 @@
             <table border="0">
                 <tr>
                     <td>받는분</td>
-                    <td class="recevier">홍길동</td>
+                    <td class="receiver">홍길동</td>
                 </tr>
                 <tr>
                     <td>배송지</td>

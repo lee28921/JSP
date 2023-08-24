@@ -40,6 +40,9 @@ public class OrderDTO {
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
 	}
+	public void setOrderNo(String orderNo) {
+		this.orderNo = Integer.parseInt(orderNo);
+	}
 	public int getOrderProduct() {
 		return orderProduct;
 	}

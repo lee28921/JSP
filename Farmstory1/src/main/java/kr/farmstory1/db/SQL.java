@@ -101,4 +101,6 @@ public class SQL {
 	public static final String SETECT_ORDERS = "SELECT a.*, b.pName, b.thumb1 FROM `Order` AS a "
 												+ "JOIN `Product` AS b ON a.orderProduct = b.pNo ";
 	public static final String SELECT_ORDER_COUNT_TOTAL = "SELECT COUNT(*) FROM `Order`";
+	
+	public static final String DELETE_ORDER = "DELETE FROM `Order` WHERE `orderNo`=?";
 }
