@@ -107,7 +107,7 @@
 	                    <tr>
 	                        <td>배송주소</td>
 	                        <td>
-	                            <input type="text" name="zip" readonly value="<%= sessUser.getZip() %>"><button id="btnZip">우편번호 검색</button>
+	                            <input type="text" name="zip" readonly value="<%= sessUser.getZip() %>"><button type="button" id="btnZip" onclick="zipcode()">우편번호 검색</button>
 	                            <input type="text" name="addr1" placeholder="기본주소 검색" value="<%= sessUser.getAddr1() %>">
 	                            <input type="text" name="addr2" placeholder="상세주소 입력" value="<%= sessUser.getAddr2() %>">
 	                        </td>
