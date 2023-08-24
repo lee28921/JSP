@@ -230,7 +230,9 @@ footer > p {
     font-weight: bold;
     text-decoration: underline;
 }
-
+#orderList .hidden {
+	display: none;
+}
 #orderPopup {
     position: absolute;
     left: 0;
@@ -292,6 +294,11 @@ footer > p {
 
 #orderPopup > section > article > table tr {
     border-bottom: 1px dotted #999;
+}
+
+#orderPopup .thumb > img {
+	width: 120px;
+	height: 120px;
 }
 
 #orderPopup .btnClose {

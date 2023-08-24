@@ -25,7 +25,14 @@ public class OrderDTO {
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
-
+	
+	private String thumb1;
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
 	
 	public int getOrderNo() {
 		return orderNo;

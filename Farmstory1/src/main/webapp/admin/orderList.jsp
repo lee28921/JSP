@@ -56,6 +56,9 @@
 	
 	List<OrderDTO> orders = dao.selectOrders();
 %>
+<script>
+
+</script>
 <main>
     <%@ include file="./_aside.jsp" %>
     <section id="orderList">
@@ -80,16 +83,20 @@
                 </tr>
                 <% for(OrderDTO order : orders){ %>
                 <tr>
-                    <td><input type="checkbox" name=""/></td>
-                    <td><%= order.getOrderProduct() %></td>
-                    <td><%= order.getpName() %></td>                            
-                    <td><%= order.getOrderPrice() %>원</td>
-                    <td><%= order.getOrderCount() %></td>
-                    <td><%= order.getOrderDelivery() %>원</td>
-                    <td><%= order.getOrderTotal() %>원</td>
-                    <td><%= order.getReceiver() %></td>
-                    <td><%= order.getOrderDate() %></td>
+                    <td class="chk"><input type="checkbox" name=""/></td>
+                    <td class="pNo"><%= order.getOrderProduct() %></td>
+                    <td class="pName"><%= order.getpName() %></td>                            
+                    <td class="price"><%= order.getOrderPrice() %>원</td>
+                    <td class="count"><%= order.getOrderCount() %></td>
+                    <td class="delivery"><%= order.getOrderDelivery() %>원</td>
+                    <td class="total"><%= order.getOrderTotal() %>원</td>
+                    <td class="orderer"><%= order.getReceiver() %></td>
+                    <td class="date"><%= order.getOrderDate() %></td>
                     <td><a href="#" class="showPopup">[상세확인]</a></td>
+                    <td class="hidden pNo">1</td>
+                    <td class="hidden thumb1">12</td>
+                    <td class="hidden receiver">22</td>
+                    <td class="hidden address">33</td>
                 </tr>
                 <% } %>
             </table>
@@ -125,31 +132,31 @@
                 <tr>
                     <td rowspan="7" class="thumb"><img src="./images//sample_item1.jpg" alt="사과 500g"></td>
                     <td>상품번호</td>
-                    <td>1011</td>
+                    <td class="pNo">상품번호</td>
                 </tr>
                 <tr>
                     <td>상품명</td>
-                    <td>사과 500g</td>
+                    <td class="pName">사과 500g</td>
                 </tr>
                 <tr>
                     <td>판매가격</td>
-                    <td>4,000원</td>
+                    <td class="price">4,000원</td>
                 </tr>
                 <tr>
                     <td>수량</td>
-                    <td>2개</td>
+                    <td class="count">2개</td>
                 </tr>
                 <tr>
                     <td>배송비</td>
-                    <td>3,000원</td>
+                    <td class="delivery">3,000원</td>
                 </tr>
                 <tr>
                     <td>합계</td>
-                    <td>11,000원</td>
+                    <td class=".total">11,000원</td>
                 </tr>
                 <tr>
                     <td>주문자</td>
-                    <td>홍길동</td>
+                    <td class="orderer">홍길동</td>
                 </tr>                        
             </table>
 
@@ -157,11 +164,11 @@
             <table border="0">
                 <tr>
                     <td>받는분</td>
-                    <td>홍길동</td>
+                    <td class="recevier">홍길동</td>
                 </tr>
                 <tr>
                     <td>배송지</td>
-                    <td>부산광역시 부산진구 대연동 120 루미너스 10층</td>
+                    <td class="address">부산광역시 부산진구 대연동 120 루미너스 10층</td>
                 </tr>
             </table>
         </article>

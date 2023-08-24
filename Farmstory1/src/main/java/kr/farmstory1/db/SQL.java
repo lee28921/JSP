@@ -98,7 +98,7 @@ public class SQL {
 													+ "`orderUser`=?, "
 													+ "`orderDate`=NOW() ";
 	
-	public static final String SETECT_ORDERS = "SELECT a.*, b.pName FROM `Order` AS a "
-												+ "JOIN `Product` AS b ON a.orderProduct = b.pNo";
+	public static final String SETECT_ORDERS = "SELECT a.*, b.pName, b.thumb1 FROM `Order` AS a "
+												+ "JOIN `Product` AS b ON a.orderProduct = b.pNo ";
 	public static final String SELECT_ORDER_COUNT_TOTAL = "SELECT COUNT(*) FROM `Order`";
 }

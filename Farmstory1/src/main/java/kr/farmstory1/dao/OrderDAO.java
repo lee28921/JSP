@@ -68,6 +68,7 @@ public class OrderDAO extends DBHelper{
 				dto.setOrderUser(rs.getString(13));
 				dto.setOrderDate(rs.getString(14));
 				dto.setpName(rs.getString(15));
+				dto.setThumb1(rs.getString(16));
 				
 				orders.add(dto);
 			}
