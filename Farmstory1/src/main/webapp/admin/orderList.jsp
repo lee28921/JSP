@@ -57,7 +57,20 @@
 	List<OrderDTO> orders = dao.selectOrders();
 %>
 <script>
-
+	$(function(){
+		
+		$('input[name=all]').change(function(){
+			
+			const isChecked = $(this).is(':checked');
+			
+			if(isChecked){
+				$('input[name=chk]').prop('checked',true);
+			}else{
+				$('input[name=chk]').prop('checked',false);
+			}
+			
+		});
+	});
 </script>
 <main>
     <%@ include file="./_aside.jsp" %>
@@ -83,8 +96,8 @@
                 </tr>
                 <% for(OrderDTO order : orders){ %>
                 <tr>
-                    <td class="chk"><input type="checkbox" name=""/></td>
-                    <td class="pNo"><%= order.getOrderProduct() %></td>
+                    <td class="chk"><input type="checkbox" name="chk"/></td>
+                    <td class="orderNo"><%= order.getOrderNo() %></td>
                     <td class="pName"><%= order.getpName() %></td>                            
                     <td class="price"><%= order.getOrderPrice() %>원</td>
                     <td class="count"><%= order.getOrderCount() %></td>
@@ -93,10 +106,10 @@
                     <td class="orderer"><%= order.getReceiver() %></td>
                     <td class="date"><%= order.getOrderDate() %></td>
                     <td><a href="#" class="showPopup">[상세확인]</a></td>
-                    <td class="hidden pNo">1</td>
-                    <td class="hidden thumb1">12</td>
-                    <td class="hidden receiver">22</td>
-                    <td class="hidden address">33</td>
+                    <td class="hidden orderProduct"><%= order.getOrderProduct() %></td>
+                    <td class="hidden thumb1"><%= order.getThumb1() %></td>
+                    <td class="hidden receiver"><%= order.getReceiver() %></td>
+                    <td class="hidden address"><%= order.getAddr1() +" "+ order.getAddr2() %></td>
                 </tr>
                 <% } %>
             </table>
