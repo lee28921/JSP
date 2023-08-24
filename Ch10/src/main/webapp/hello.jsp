@@ -18,5 +18,8 @@
 		<a href="/Ch10/welcome.do">welcome</a>
 		<a href="/Ch10/greeting.do">greeting</a>
 		
+		<h4>User1 실습</h4>
+		<a href="/Ch10/user1/list.do">목록</a>
+		<a href="/Ch10/user1/register.do">등록</a>
 	</body>
 </html>
