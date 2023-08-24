@@ -8,12 +8,16 @@
 	String type = request.getParameter("type");
 	String pg = request.getParameter("pg");
 	
+	if(type == null){
+		type = "0";
+	}
+	
 	ProductDAO dao = new ProductDAO();
 	
 	// 페이지 관련 변수
 	int start = 0;
 	int currentPage = 1;
-	int total = dao.selectCountProductsTotal(type);
+	int total = 0;
 	int lastPageNum = 0;
 	int pageGroupCurrent = 1;
 	int pageGroupStart = 1;
@@ -29,6 +33,8 @@
 	}else{
 		lastPageNum = (total / 10) + 1; 
 	}
+	
+	total = dao.selectCountProductsTotal(type);
 	
 	// 페이지 그룹계산 - 페이지 네비게이션
 	pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
@@ -95,9 +101,11 @@
             	<% if(pageGroupStart > 1) { %>
                 <a href="./list.jsp?type=<%= type %>&pg=<%= pageGroupStart - 1  %>" class="prev"><</a>
                 <% } %>
+                
                 <% for(int i=pageGroupStart; i<=pageGroupEnd ; i++) { %>
-                <a href="./list.jsp?type=<%= type %>&pg=<%= i %>" class="num <%= (currentPage == i)?"on":"" %>">[<%= i %>]</a>
+                <a href="./list.jsp?type=<%= type %>&pg=<%= i %>" class="<%= (currentPage == i)?"on":"" %>">[<%= i %>]</a>
                 <% } %>
+                
                 <% if(pageGroupEnd < lastPageNum){ %>
                 <a href="./list.jsp?type=<%= type %>&pg=<%= pageGroupEnd +1 %>" class="next">></a>
                 <% } %>

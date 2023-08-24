@@ -1,5 +1,61 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.farmstory.dto.OrderDTO"%>
+<%@page import="kr.farmstory1.dao.OrderDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String pg = request.getParameter("pg");
+
+	OrderDAO dao = new OrderDAO();
+	
+	// 페이지 관련 변수
+		int start = 0;
+		int currentPage = 1;
+		int total = 0; 
+		int lastPageNum = 0;
+		int pageGroupCurrent = 1;
+		int pageGroupStart = 1;
+		int pageGroupEnd = 0;
+		int pageStartNum = 0;
+		
+
+		// 현재 페이지 계산
+		if(pg != null){
+			currentPage = Integer.parseInt(pg);
+			
+		}
+		// Limit 시작값 계산
+		start = (currentPage -1) * 10;
+		
+		// 전체 게시물 갯수 조회
+		total = dao.selectCountTotal();
+
+		// 페이지 번호 계산
+		if(total % 10 == 0){
+			lastPageNum = (total / 10);
+		}else{
+			lastPageNum = (total / 10) + 1; 
+		}
+
+		// 페이지 그룹계산 - 페이지 네비게이션
+		pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
+
+			//그룹 시작 번호가 1, 11, 21 순으로 보이게 하기
+		pageGroupStart = (pageGroupCurrent - 1) * 10 + 1; 
+		
+			//그룹 마지막 번호가 10, 20, 30 순으로 보이게 하기
+		pageGroupEnd = pageGroupCurrent * 10;
+		
+		if(pageGroupEnd > lastPageNum){
+			pageGroupEnd = lastPageNum;
+		}
+		
+		// 페이지 시작번호 계산
+		pageStartNum = total - start;
+	
+	List<OrderDTO> orders = dao.selectOrders();
+%>
 <main>
     <%@ include file="./_aside.jsp" %>
     <section id="orderList">
@@ -22,18 +78,20 @@
                     <th>주문일</th>
                     <th>확인</th>
                 </tr>
+                <% for(OrderDTO order : orders){ %>
                 <tr>
                     <td><input type="checkbox" name=""/></td>
-                    <td>1001</td>
-                    <td>사과 500g</td>                            
-                    <td>4,000원</td>
-                    <td>2</td>
-                    <td>3,000원</td>
-                    <td>11,000원</td>
-                    <td>김유신</td>
-                    <td>2023-01-01 13:06:14</td>
+                    <td><%= order.getOrderProduct() %></td>
+                    <td><%= order.getpName() %></td>                            
+                    <td><%= order.getOrderPrice() %>원</td>
+                    <td><%= order.getOrderCount() %></td>
+                    <td><%= order.getOrderDelivery() %>원</td>
+                    <td><%= order.getOrderTotal() %>원</td>
+                    <td><%= order.getReceiver() %></td>
+                    <td><%= order.getOrderDate() %></td>
                     <td><a href="#" class="showPopup">[상세확인]</a></td>
                 </tr>
+                <% } %>
             </table>
 
             <p>
@@ -41,13 +99,15 @@
             </p>
             
             <p class="paging">
-                <a href="#"><</a>
-                <a href="#" class="on">[1]</a>
-                <a href="#">[2]</a>
-                <a href="#">[3]</a>
-                <a href="#">[4]</a>
-                <a href="#">[5]</a>
-                <a href="#">></a>
+            	<% if(pageGroupStart > 1){ %>
+                <a href="./orderList.jsp?pg=<%= pageGroupStart -1 %>" class="prev"><</a>
+                <% } %>
+                <% for(int i=pageGroupStart ; i<=pageGroupEnd ; i++){ %>
+                <a href="./orderList.jsp?pg=<%= i %>" class="<%= (currentPage == i)?"on":"" %>">[<%= i %>]</a>
+                <% } %>
+                <% if(pageGroupEnd < lastPageNum){ %>
+                <a href="./orderList.jsp?pg=<%= pageGroupEnd + 1 %>" class="next">></a>
+                <% } %>
             </p>
         </article>
     </section>

@@ -16,6 +16,17 @@ public class OrderDTO {
 	private String orderUser;
 	private String orderDate;
 	
+	// 추가
+	private String pName;
+	
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+
+	
 	public int getOrderNo() {
 		return orderNo;
 	}
