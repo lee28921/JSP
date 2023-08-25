@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,17 +16,21 @@
 				<th>이름</th>
 				<th>휴대폰</th>
 				<th>직급</th>
-				<th>dep</th>
-				<th>날짜</th>
+				<th>부서</th>
 			</tr>
+			<c:forEach var="member" items="${requestScope.members}">
 			<tr>
-				<td>1212</td>
-				<td>2121</td>
-				<td>12121</td>
-				<td>21212</td>
-				<td>21212</td>
-				<td>21212</td>
+				<td>${member.getUid()}</td>
+				<td>${member.getName()}</td>
+				<td>${member.getHp()}</td>
+				<td>${member.getPos()}</td>
+				<td>${member.getDep()}</td>
+				<td>
+					<a href="/Ch11/modify.do?uid=${member.getUid()}">수정</a>
+					<a href="/Ch11/delete.do?uid=${member.getUid()}">삭제</a>
+				</td>
 			</tr>
+			</c:forEach>
 		</table>
 	</body>
 </html>

@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -53,11 +55,117 @@ public class MemberDAO {
 		
 	}
 	public MemberDTO selectMember(String uid) {
-		return null;
+		MemberDTO dto = new MemberDTO();
+		
+		try {
+			logger.info("MemberDAO selectDAO...");
+			
+			Context initCtx = new InitialContext();
+			Context ctx = (Context) initCtx.lookup("java:comp/env");
+			
+			DataSource ds = (DataSource) ctx.lookup("jdbc/userdb");
+			Connection conn = ds.getConnection();
+			
+			PreparedStatement psmt = conn.prepareStatement("SELECT * FROM `member` WHERE `uid`=?");
+			psmt.setString(1, uid);
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setUid(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setHp(rs.getString(3));
+				dto.setPos(rs.getString(4));
+				dto.setDep(rs.getInt(5));
+				dto.setRdate(rs.getString(6));
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+		} catch(Exception e) {
+			logger.error("MemberDAO selectMember error : "+e.getMessage());
+		}
+		return dto;
 	}
 	public List<MemberDTO> selectMembers() {
-		return null;
+		List<MemberDTO> members = new ArrayList<>();
+		
+		try {
+			logger.info("MemberDAO selectDAO...");
+			
+			Context initCtx = new InitialContext();
+			Context ctx = (Context) initCtx.lookup("java:comp/env");
+			
+			DataSource ds = (DataSource) ctx.lookup("jdbc/userdb");
+			Connection conn = ds.getConnection();
+			
+			PreparedStatement psmt = conn.prepareStatement("SELECT * FROM `member`");
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberDTO dto = new MemberDTO();
+				dto.setUid(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setHp(rs.getString(3));
+				dto.setPos(rs.getString(4));
+				dto.setDep(rs.getInt(5));
+				dto.setRdate(rs.getString(6));
+				
+				members.add(dto);
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+		} catch (Exception e) {
+			logger.error("MemberDAO selectMember error :"+e.getMessage());
+		}
+		
+		return members;
 	}
-	public void updateMember(MemberDTO dto) {}
-	public void deleteMember(String uid) {}
+	public void updateMember(MemberDTO dto) {
+		try {
+			logger.info("MemberDAO updateDAO...");
+			
+			Context initCtx = new InitialContext();
+			Context ctx = (Context) initCtx.lookup("java:comp/env");
+			
+			DataSource ds = (DataSource) ctx.lookup("jdbc/userdb");
+			Connection conn = ds.getConnection();
+			
+			PreparedStatement psmt = conn.prepareStatement("UPDATE `member` SET `name`=?, `hp`=?, `pos`=?, `dep`=? WHERE `uid`=?");
+			psmt.setString(1, dto.getName());
+			psmt.setString(2, dto.getHp());
+			psmt.setString(3, dto.getPos());
+			psmt.setInt(4, dto.getDep());
+			psmt.setString(5, dto.getUid());
+			psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		} catch(Exception e) {
+			logger.error("MemberDAO updateMember error :"+e.getMessage());
+		}
+		
+	}
+	public void deleteMember(String uid) {
+		try {
+			logger.info("MemberDAO deleteDAO...");
+			
+			Context initCtx = new InitialContext();
+			Context ctx = (Context) initCtx.lookup("java:comp/env");
+			
+			DataSource ds = (DataSource) ctx.lookup("jdbc/userdb");
+			Connection conn = ds.getConnection();
+			PreparedStatement psmt = conn.prepareStatement("DELETE FROM `member` WHERE `uid`=?");
+			psmt.setString(1, uid);
+			psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		} catch(Exception e) {
+			logger.error("MemberDAO updateMember error :"+e.getMessage());
+		}
+	}
 }

@@ -36,7 +36,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>dep</td>
+					<td>부서</td>
 					<td>
 						<select name="dep">
 							<option value="101">영업1부</option>

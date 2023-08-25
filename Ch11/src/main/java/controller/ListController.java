@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.util.logging.Logger;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,12 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import dto.MemberDTO;
+import service.MemberService;
+
 @WebServlet("/list.do")
 public class ListController extends HttpServlet {
 
 	private static final long serialVersionUID = 7807099506362753862L;
 	
-	private Logger logger = Logger.getGlobal();
+	private MemberService service = MemberService.INSTANCE;
+	
+	// 로거생성
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	
 	@Override
@@ -27,6 +36,9 @@ public class ListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("ListController doGet...");
 		
+		List<MemberDTO> members = service.selectMembers();
+		
+		req.setAttribute("members", members);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/list.jsp");
 		dispatcher.forward(req, resp);
