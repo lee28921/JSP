@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<property name="NAME" value="Ch11"/>
+	<!-- 개발용
+	<property name="DIR" value="/logs/"/>
+	-->
+	<!-- 배포용 -->
+	<property name="DIR" value="/home/jsp/logs/"/>
 	
 	<!-- 콘솔 어펜더 -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -11,7 +16,7 @@
 
 	<!-- 파일 어펜더 -->	
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>/logs/${NAME}.log</file>
+		<file>${DIR}/${NAME}.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
    			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -21,8 +26,8 @@
 	<!-- 롤링 어펜더 -->
 	
 	
-	<root level="info">
-		<appender-ref ref="STDOUT" />
+	<root level="error"> <!-- 배포시 STDOUT는 주석처리 -->
+		<!-- <appender-ref ref="STDOUT" /> -->
 		<appender-ref ref="FILE" />
 	</root>
 
