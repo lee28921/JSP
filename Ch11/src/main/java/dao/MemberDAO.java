@@ -8,9 +8,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.classic.Logger;
 import dto.MemberDTO;
 
 public class MemberDAO {
@@ -20,7 +20,7 @@ public class MemberDAO {
 		return instance;
 	}
 
-	private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private MemberDAO() {} 
 	
@@ -48,7 +48,7 @@ public class MemberDAO {
 			conn.close();
 			
 		} catch (Exception e) {
-			logger.error("MemberDAO insertMemver error :"+e.getMessage());
+			logger.error("MemberDAO insertMember error :"+e.getMessage());
 		}
 		
 	}
