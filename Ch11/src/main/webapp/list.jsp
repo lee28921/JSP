@@ -7,6 +7,8 @@
 	</head>
 	<body>
 		<h3>Member 목록</h3>
+		<a href="/Ch11">메인</a>
+		<a href="/Ch11/register.do">직원등록</a>
 		<table border="1">
 			<tr>
 				<th>아이디</th>

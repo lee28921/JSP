@@ -7,6 +7,8 @@
 	</head>
 	<body>
 		<h3>글작성</h3>
+		<a href="/Ch11">메인</a>
+		<a href="/Ch11/list.do">직원목록</a>
 		<form action="/Ch11/register.do" method="post">
 			<table border="1">
 				<tr>
