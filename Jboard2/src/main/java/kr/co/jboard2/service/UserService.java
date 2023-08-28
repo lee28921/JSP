@@ -1,17 +1,34 @@
 package kr.co.jboard2.service;
 
 import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.ThreadLocalRandom;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import kr.co.jboard2.dao.UserDAO;
 import kr.co.jboard2.dto.UserDTO;
 
 public class UserService {
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	private static UserService instance = new UserService();
 	public static UserService getInstance() {
 		return instance;
 	}
 	private UserService() {}
+	
+	private static String generatendCode;
 	
 	private UserDAO dao = UserDAO.getInstance();
 	
@@ -39,4 +56,64 @@ public class UserService {
 	public void updateUser(UserDTO dto) {}
 	
 	public void deleteUser(String uid) {}
+	
+	public int sendCodeByEmail(String receiver) {
+		
+		// 인증코드 생성
+		int code = ThreadLocalRandom.current().nextInt(100000,1000000);
+		generatendCode = ""+code;
+		 
+		// 기본정보
+		String sender = "dlwlals6790@gmail.com";
+		String password = "yjvqpojkktkcjikq";
+		String title = "Jboard2 인증코드 입니다.";
+		String content = "<h1>인증코드는 "+generatendCode+"</h1>";
+		
+		// Gmail SMTP 서버 설정
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "465");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.ssl.enable", "true");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		
+		// Gmail STMP 세션 생성
+		Session gmailSession = Session.getInstance(props, new Authenticator(){
+			
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication(){
+				return new PasswordAuthentication(sender, password);
+			}
+		});
+		
+		// 메일 발송
+		int status = 0;
+		Message message = new MimeMessage(gmailSession);
+		
+		try{
+			logger.info("here...1");
+			message.setFrom(new InternetAddress(sender, "보내는 사람", "UTF-8"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+			message.setSubject(title);
+			message.setContent(content, "text/html;charset=UTF-8");
+			Transport.send(message);
+			
+			status = 1;
+		}catch(Exception e){
+			status = 0;
+		}
+		
+		return status;
+		
+	} // sendCodeByEmail end
+	
+	public int confirmCodeByEmail(String code) {
+		
+		if(code.equals(generatendCode)) {
+			return 1;
+		}else {
+			return 0;
+		}
+		
+	}
 }

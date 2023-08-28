@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="./_header.jsp" %>
 <script>
 	
 	window.onload = function(){
@@ -50,9 +51,9 @@
 				success : function(data){
 					
 					if(data.result > 0){
-						$('.resultHp').css('color','red').text('이미 사용중인 별명입니다.');
+						$('.nickResult').css('color','red').text('이미 사용중인 별명입니다.');
 					}else {
-						$('.resultHp').css('color','green').text('사용가능한 별명입니다.');
+						$('.nickResult').css('color','green').text('사용가능한 별명입니다.');
 					}
 					
 					
@@ -81,9 +82,82 @@
 		}); // 휴대폰 체크 end
 		
 	} // onload end
+	
+	// 이메일 인증
+	$(function(){
+		
+		let preventDoubleClick = false;
+		
+		// 이메일 인증번호 받기
+		$('#btnEmailCode').click(function(){
+			
+			const email = $('input[name=email]').val();
+			const jsonData = {
+				"email":email
+			};
+			
+			if(preventDoubleClick){ // 더블클릭 막기
+				return;
+			}
+			
+			preventDoubleClick = true;
+			$('.resultEmail').text('인증코드 전송 중 입니다. 잠시만 기다리세요...');
+			
+			setTimeout(function(){ // 1초 후에 서버 요청
+				
+				$.ajax({
+					url:'/Jboard2/user/authEmail.do',
+					type: 'GET',
+					data: jsonData,
+					dataType: 'json',
+					success: function(data){
+						console.log(data);
+						
+						if(data.status > 0){
+							$('.resultEmail').text('이메일을 확인 후 인증코드를 입력하세요.');
+							$('.auth').show();
+						} else {
+							$('.resultEmail').text('인증코드 전송이 실패했습니다. 잠시 후 다시 시도해 주십시오.');
+						}
+						
+						preventDoubleClick = false;
+						
+					}
+				});
+			},1000);
+			
+		});
+		
+		$('#btnEmailAuth').click(function(){
+			
+			const code = $('input[name=auth]').val();
+			const jsonData = {
+					"code":code
+			}
+			
+			$.ajax({
+				url:'/Jboard2/user/authEmail.do',
+				type:'POST',
+				data: jsonData,
+				dataType:'json',
+				success: function(data){
+					
+					console.log(data);
+					
+					if(data.result > 0){
+						$('.resultEmail').css('color','green').text('이메일 인증이 완료 되었습니다.');
+					}else{
+						$('.resultEmail').css('color','red').text('이메일 인증이 실패했습니다. 다시 시도하십시오.');
+					}
+					
+				}
+			});
+			
+		});
+		
+	});
 
 </script>
-<%@ include file="./_header.jsp" %>
         <main id="user">
             <section class="register">
 
@@ -129,10 +203,11 @@
                             <td>이메일</td>
                             <td>
                                 <input type="email" name="email" placeholder="이메일 입력"/>
-                                <button type="button"><img src="../img/chk_auth.gif" alt="인증번호 받기"/></button>
+                                <button type="button" id="btnEmailCode"><img src="../img/chk_auth.gif" alt="인증번호 받기"/></button>
+                                <span class="resultEmail"></span>
                                 <div class="auth">
                                     <input type="text" name="auth" placeholder="인증번호 입력"/>
-                                    <button type="button"><img src="../img/chk_confirm.gif" alt="확인"/></button>
+                                    <button type="button" id="btnEmailAuth"><img src="../img/chk_confirm.gif" alt="확인"/></button>
                                 </div>
                             </td>
                         </tr>
