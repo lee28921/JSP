@@ -91,7 +91,7 @@ public class UserService {
 		Message message = new MimeMessage(gmailSession);
 		
 		try{
-			logger.info("here...1");
+			logger.info("here1...");
 			message.setFrom(new InternetAddress(sender, "보내는 사람", "UTF-8"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
 			message.setSubject(title);
@@ -101,6 +101,7 @@ public class UserService {
 			status = 1;
 		}catch(Exception e){
 			status = 0;
+			logger.error("sendCodeByEmail() error : " + e.getMessage());
 		}
 		
 		return status;
@@ -110,8 +111,10 @@ public class UserService {
 	public int confirmCodeByEmail(String code) {
 		
 		if(code.equals(generatendCode)) {
+			logger.info("return 1...");
 			return 1;
 		}else {
+			logger.info("return 0...");
 			return 0;
 		}
 		
