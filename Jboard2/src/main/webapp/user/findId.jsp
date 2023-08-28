@@ -31,8 +31,8 @@
                 </p>
 
                 <div>
-                    <a href="./login.html" class="btn btnCancel">취소</a>
-                    <a href="./findIdResult.html" class="btn btnNext">다음</a>
+                    <a href="./login.jsp" class="btn btnCancel">취소</a>
+                    <a href="./findIdResult.jsp" class="btn btnNext">다음</a>
                 </div>
             </section>
         </main>

@@ -2,7 +2,7 @@
 <%@ include file="./_header.jsp" %>
 <main id="user">
     <section class="login">
-        <form action="../list.html">
+        <form action="../list.jsp">
             <table border="0">
                 <tr>
                     <td><img src="../img/login_ico_id.png" alt="아이디"/></td>
@@ -22,9 +22,9 @@
                 아직 회원이 아니시면 회원으로 가입하세요.
             </p>
             <div style="text-align: right;">
-                <a href="./findId.html">아이디 |</a>
-                <a href="./findPw.html">비밀번호찾기 |</a>
-                <a href="./terms.html">회원가입</a>
+                <a href="./findId.jsp">아이디 |</a>
+                <a href="./findPass.jsp">비밀번호찾기 |</a>
+                <a href="./terms.jsp">회원가입</a>
             </div>                    
         </div>
     </section>
