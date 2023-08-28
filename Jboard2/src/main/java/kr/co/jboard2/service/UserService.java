@@ -28,6 +28,9 @@ public class UserService {
 	public int selectCountNick(String nick) {
 		return dao.selectCountNick(nick);
 	}
+	public int selectCountHp(String hp) {
+		return dao.selectCountHp(hp);
+	}
 	
 	public List<UserDTO> selectUsers() {
 		return null;

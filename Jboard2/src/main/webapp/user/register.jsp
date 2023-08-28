@@ -50,16 +50,35 @@
 				success : function(data){
 					
 					if(data.result > 0){
-						$('.nickResult').css('color','red').text('이미 사용중인 별명입니다.');
+						$('.resultHp').css('color','red').text('이미 사용중인 별명입니다.');
 					}else {
-						$('.nickResult').css('color','green').text('사용가능한 별명입니다.');
+						$('.resultHp').css('color','green').text('사용가능한 별명입니다.');
 					}
 					
 					
 				}
 			});
 			
-		});
+		}); // 닉네임 체크 end
+		
+		$('input[name=hp]').focusout(function(){
+			
+			const hp = $(this).val();
+			const url = '/Jboard2/user/checkHp.do?hp='+hp;
+			
+			$.get(url, function(result){ // data -> result
+				
+				const data = JSON.parse(result); // 문자열로 들어오기에 parse
+				
+				if(data.result > 0){
+					$('.resultHp').css('color', 'red').text('이미 사용중인 휴대폰입니다.');
+				} else {
+					$('.resultHp').css('color', 'green').text('사용 가능한 휴대폰입니다.');
+				}
+				
+			});
+			
+		}); // 휴대폰 체크 end
 		
 	} // onload end
 
@@ -119,7 +138,10 @@
                         </tr>
                         <tr>
                             <td>휴대폰</td>
-                            <td><input type="text" name="hp" placeholder="휴대폰 입력"/></td>
+                            <td>
+                            	<input type="text" name="hp" placeholder="휴대폰 입력"/>
+                            	<span class="resultHp"></span>	
+                            </td>
                         </tr>
                         <tr>
                             <td>주소</td>
