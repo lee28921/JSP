@@ -1,4 +1,46 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<script>
+	
+	window.onload = function(){
+		
+		const inputUid = document.getElementsByName('uid')[0];
+		const btnCheckUdi = document.getElementById('btnCheckUid');
+		const uidResult = document.getElementsByClassName('uidResult')[0];
+		
+		btnCheckUid.onclick = function(){
+			
+			const uid = inputUid.value; // 회원가입에서 현재 입력한 아이디
+			
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET','/Jboard2/user/checkUid.do?uid='+uid);
+			xhr.send();
+			
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == XMLHttpRequest.DONE){
+					
+					if(xhr.status == 200){ // 응답성공시
+						
+						const data = JSON.parse(xhr.response);
+						
+						if(data.result > 0){
+							uidResult.innerText = '이미 사용중인 아이디입니다.';
+							uidResult.style.color = 'red';
+							
+						} else {
+							uidResult.innerText = '사용가능한 아이디입니다.';
+							uidResult.style.color = 'green';
+						}
+					
+					
+					}
+					
+				} // readyState end
+			} // onreadystatechange end
+			
+		} // 아이디 체크 end
+	} // onload end
+
+</script>
 <%@ include file="./_header.jsp" %>
         <main id="user">
             <section class="register">
@@ -10,7 +52,7 @@
                             <td>아이디</td>
                             <td>
                                 <input type="text" name="uid" placeholder="아이디 입력"/>
-                                <button type="button"><img src="../img/chk_id.gif" alt="중복확인"/></button>
+                                <button type="button" id="btnCheckUid"><img src="../img/chk_id.gif" alt="중복확인"/></button>
                                 <span class="uidResult"></span>
                             </td>
                         </tr>

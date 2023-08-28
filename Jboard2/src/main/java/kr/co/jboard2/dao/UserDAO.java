@@ -43,6 +43,28 @@ public class UserDAO extends DBHelper{
 		
 	}
 	
+	public int selectCountUid(String uid) {
+		
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_USER_UID);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountUid() arror :"+e.getMessage());
+		}
+		
+		return result;
+	}
+	
 	public UserDTO selectUser(String uid) {
 		return null;
 	}

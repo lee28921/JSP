@@ -22,6 +22,10 @@ public class UserService {
 		return null;
 	}
 	
+	public int selectCountUid(String uid) {
+		return dao.selectCountUid(uid);
+	}
+	
 	public List<UserDTO> selectUsers() {
 		return null;
 	}

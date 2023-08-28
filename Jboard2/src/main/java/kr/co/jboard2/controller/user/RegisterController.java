@@ -41,6 +41,7 @@ public class RegisterController extends HttpServlet {
 		String nick		= req.getParameter("nick");
 		String email	= req.getParameter("email");
 		String hp		= req.getParameter("hp");
+		String regip	= req.getRemoteAddr();
 		
 		UserDTO dto = new UserDTO();
 		dto.setUid(uid);
@@ -50,6 +51,7 @@ public class RegisterController extends HttpServlet {
 		dto.setEmail(email);
 		dto.setHp(hp);
 		dto.setRegip(hp);
+		dto.setRegip(regip);
 		
 		service.insertUser(dto);
 		
