@@ -1,16 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>비밀번호 변경</title>
-    <link rel="stylesheet" href="../css/style.css"/>
-</head>
-<body>
-    <div id="wrapper">
-        <header>
-            <h3>Board System v2.0</h3>
-        </header>
+<%@ include file="./_header.jsp" %>
         <main id="user">
             <section class="find findPassChange">
                 <form action="#">
@@ -46,9 +35,4 @@
                 </div>
             </section>
         </main>
-        <footer>
-            <p>ⓒCopyright chhak.or.kr</p>
-        </footer>
-    </div>    
-</body>
-</html>
+<%@ include file="./_footer.jsp" %>
