@@ -38,6 +38,29 @@
 			} // onreadystatechange end
 			
 		} // 아이디 체크 end
+		
+		$('#btnCheckNick').click(function(){
+
+			const nick = $('input[name=nick]').val();
+			
+			$.ajax({
+				url:'/Jboard2/user/checkNick.do?nick='+nick,
+				type:'get',
+				dataType:'json',
+				success : function(data){
+					
+					if(data.result > 0){
+						$('.nickResult').css('color','red').text('이미 사용중인 별명입니다.');
+					}else {
+						$('.nickResult').css('color','green').text('사용가능한 별명입니다.');
+					}
+					
+					
+				}
+			});
+			
+		});
+		
 	} // onload end
 
 </script>
@@ -79,7 +102,7 @@
                             <td>
                                 <p class="nickInfo">공백없는 한글, 영문, 숫자 입력</p>
                                 <input type="text" name="nick" placeholder="별명 입력"/>
-                                <button type="button"><img src="../img/chk_id.gif" alt="중복확인"/></button>
+                                <button type="button" id="btnCheckNick"><img src="../img/chk_id.gif" alt="중복확인"/></button>
                                 <span class="nickResult"></span>
                             </td>
                         </tr>
