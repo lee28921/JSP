@@ -64,5 +64,5 @@ public class SQL {
 		public final static String DELETE_COMMINT = "DELETE FROM `Article` WHERE `no`=?";
 		
 		// terms
-		public final static String SELECT_TERMS = "SELECT * FROM `terms`";
+		public final static String SELECT_TERMS = "SELECT * FROM `Terms`";
 }

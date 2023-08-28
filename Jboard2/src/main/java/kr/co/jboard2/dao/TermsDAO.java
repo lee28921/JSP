@@ -11,8 +11,6 @@ public class TermsDAO extends DBHelper {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public void insertTerms() {}
-	
 	public TermsDTO selectTerms() {
 		TermsDTO dto = new TermsDTO();
 		
@@ -34,7 +32,4 @@ public class TermsDAO extends DBHelper {
 		return dto;
 	}
 	
-	public void updateTerms() {}
-	
-	public void deleteTerms() {}
 }
