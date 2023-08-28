@@ -9,10 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import kr.co.jboard2.dto.UserDTO;
+import kr.co.jboard2.service.UserService;
+
 @WebServlet("/user/register.do")
 public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = -3937831513474791716L;
+	
+	private UserService service = UserService.getInstance();
+	
+	// 로거 생성
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,7 +33,27 @@ public class RegisterController extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	
+		logger.info("RegisterController doPost...");
+		
+		String uid		= req.getParameter("uid");
+		String pass1	= req.getParameter("pass1");
+		String name		= req.getParameter("name");
+		String nick		= req.getParameter("nick");
+		String email	= req.getParameter("email");
+		String hp		= req.getParameter("hp");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUid(uid);
+		dto.setPass(pass1);
+		dto.setName(name);
+		dto.setNick(nick);
+		dto.setEmail(email);
+		dto.setHp(hp);
+		dto.setRegip(hp);
+		
+		service.insertUser(dto);
+		
+		resp.sendRedirect("/Jboard2/user/login.do?success=200");
+		
 	}
 }
