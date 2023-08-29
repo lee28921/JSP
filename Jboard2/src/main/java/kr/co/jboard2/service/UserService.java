@@ -35,8 +35,8 @@ public class UserService {
 	public void insertUser(UserDTO dto) {
 		dao.insertUser(dto);
 	}
-	public UserDTO selectUser(String uid) {
-		return null;
+	public UserDTO selectUser(String uid,String pass) {
+		return dao.selectUser(uid, pass);
 	}
 	
 	public int selectCountUid(String uid) {
