@@ -5,6 +5,7 @@
 <script></script>
 <script src="/Jboard2/js/checkUser.js"></script>
 <script src="/Jboard2/js/authEmail.js"></script>
+<script src="/Jboard2/js/validation.js"></script>
 <main id="user">
     <section class="register">
 
