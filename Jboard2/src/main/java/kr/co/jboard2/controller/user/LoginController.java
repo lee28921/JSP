@@ -39,12 +39,7 @@ public class LoginController extends HttpServlet {
 		String uid	= req.getParameter("uid");
 		String pass = req.getParameter("pass");
 		
-		logger.info("uid : "+uid);
-		logger.info("pass : "+pass);
-		
 		UserDTO user = service.selectUser(uid, pass);
-		
-		logger.info("user : "+user);
 		
 		if(user != null) {
 			

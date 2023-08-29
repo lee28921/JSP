@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script src="/Jboard2/js/authEmail.js"></script>
         <main id="user">
             <section class="find findId">
                 <form action="#">
@@ -14,11 +15,12 @@
                             <td>
                                 <div>
                                     <input type="email" name="email" placeholder="이메일 입력"/>
-                                    <button type="button" class="btnAuth">인증번호 받기</button>
+                                    <button type="button" id="btnEmailCode" class="btnAuth">인증번호 받기</button>
+                                    <span class="resultEmailForId"></span>
                                 </div>
                                 <div>
                                     <input type="text" name="auth" disabled placeholder="인증번호 입력"/>
-                                    <button type="button" class="btnConfirm">확인</button>
+                                    <button type="button" id="btnEmailAuth" class="btnConfirm">확인</button>
                                 </div>
                             </td>
                         </tr>                        
@@ -31,8 +33,8 @@
                 </p>
 
                 <div>
-                    <a href="./login.jsp" class="btn btnCancel">취소</a>
-                    <a href="./findIdResult.jsp" class="btn btnNext">다음</a>
+                    <a href="./login.do" class="btn btnCancel">취소</a>
+                    <a href="./findIdResult.do" class="btn btnNext">다음</a>
                 </div>
             </section>
         </main>

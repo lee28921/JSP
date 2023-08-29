@@ -18,6 +18,7 @@ public class SQL {
 		public static final String SELECT_USER_UID	= "SELECT COUNT(*) FROM `User` WHERE `uid`=?";
 		public static final String SELECT_USER_NICK	= "SELECT COUNT(*) FROM `User` WHERE `nick`=?";
 		public static final String SELECT_USER_EMAIL= "SELECT COUNT(*) FROM `User` WHERE `email`=?";
+		public static final String SELECT_USER_NAME_EMAIL= "SELECT COUNT(*) FROM `User` WHERE `name`=? AND `email`=?";
 		public static final String SELECT_USER_HP	= "SELECT COUNT(*) FROM `User` WHERE `hp`=?";
 		
 		// Article
