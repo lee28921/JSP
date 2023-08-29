@@ -35,6 +35,7 @@ $(function(){
 					if(data.status > 0){
 						$('.resultEmail').text('이메일을 확인 후 인증코드를 입력하세요.');
 						$('.auth').show();
+						$('input[name=email]').attr('readonly',true);
 					} else {
 						$('.resultEmail').text('인증코드 전송이 실패했습니다. 잠시 후 다시 시도해 주십시오.');
 					}
@@ -65,8 +66,10 @@ $(function(){
 				
 				if(data.result > 0){
 					$('.resultEmail').css('color','green').text('이메일 인증이 완료 되었습니다.');
+					isEmailOk = true;
 				}else{
 					$('.resultEmail').css('color','red').text('이메일 인증이 실패했습니다. 다시 시도하십시오.');
+					isEmailOk = false;
 				}
 				
 			}
