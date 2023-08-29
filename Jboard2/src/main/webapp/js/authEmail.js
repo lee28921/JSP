@@ -32,13 +32,21 @@ $(function(){
 				success: function(data){
 					console.log(data);
 					
-					if(data.status > 0){
-						$('.resultEmail').text('이메일을 확인 후 인증코드를 입력하세요.');
-						$('.auth').show();
-						$('input[name=email]').attr('readonly',true);
-					} else {
-						$('.resultEmail').text('인증코드 전송이 실패했습니다. 잠시 후 다시 시도해 주십시오.');
+					if(data.result > 0){ // 중복제어
+						$('.resultEmail').css('color','green').text('이미 사용중인 이메일 입니다.');
+						isEmailOk = false;
+					}else{
+						
+						if(data.status > 0){ // 인증받기
+							$('.resultEmail').text('이메일을 확인 후 인증코드를 입력하세요.');
+							$('.auth').show();
+							$('input[name=email]').attr('readonly',true);
+						} else {
+							$('.resultEmail').text('인증코드 전송이 실패했습니다. 잠시 후 다시 시도해 주십시오.');
+						}
 					}
+					
+					
 					
 					preventDoubleClick = false;
 					

@@ -86,6 +86,27 @@ public class UserDAO extends DBHelper{
 		
 	}
 
+	public int selectCountEmail(String email) {
+		
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_USER_EMAIL);
+			psmt.setString(1, email);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch(Exception e) {
+			logger.error("selectCountEmail() error : "+e.getMessage());
+		}
+		
+		return result;
+		
+	}
 	public int selectCountHp(String hp) {
 		
 		int result = 0;

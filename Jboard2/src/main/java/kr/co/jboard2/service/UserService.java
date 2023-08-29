@@ -48,6 +48,9 @@ public class UserService {
 	public int selectCountHp(String hp) {
 		return dao.selectCountHp(hp);
 	}
+	public int selectCountEmail(String email) {
+		return dao.selectCountEmail(email);
+	}
 	
 	public List<UserDTO> selectUsers() {
 		return null;
