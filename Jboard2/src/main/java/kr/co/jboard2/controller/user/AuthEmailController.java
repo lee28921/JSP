@@ -34,6 +34,8 @@ public class AuthEmailController extends HttpServlet {
 		int result = 0;
 		int status = 0;
 		
+		logger.info("Auth type : "+type);
+		
 		if(type.equals("REGISTER")) {
 			// 회원가입할 때 이메일 인증
 			result = service.selectCountEmail(email);
@@ -52,9 +54,17 @@ public class AuthEmailController extends HttpServlet {
 				status = service.sendCodeByEmail(email);
 			}
 		} else if(type.equals("FIND_PASS")) {
+			// 비밀번호 찾기 할때 이메일 인증
 			result = service.selectCountUidAndEmail(uid, email);
 			
 			logger.info("Auth uid : "+uid);
+			
+			if(result == 1) {
+				status = service.sendCodeByEmail(email);
+			}
+		} else if(type.equals("MODIFY")) {
+			// 이메일을 수정할 때 이메일 인증
+			result = service.selectCountEmail(email);
 			
 			if(result == 1) {
 				status = service.sendCodeByEmail(email);

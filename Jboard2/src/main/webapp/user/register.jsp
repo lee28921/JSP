@@ -2,7 +2,6 @@
 <%@ include file="./_header.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/Jboard2/js/zipcode.js"></script>
-<script></script>
 <script src="/Jboard2/js/checkUser.js"></script>
 <script src="/Jboard2/js/authEmail.js"></script>
 <script src="/Jboard2/js/validation.js"></script>

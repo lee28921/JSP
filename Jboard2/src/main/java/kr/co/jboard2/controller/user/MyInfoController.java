@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 
+import kr.co.jboard2.dto.UserDTO;
 import kr.co.jboard2.service.UserService;
 
 @WebServlet("/user/myInfo.do")
@@ -36,6 +37,16 @@ public class MyInfoController extends HttpServlet{
 		String kind = req.getParameter("kind");
 		String uid = req.getParameter("uid");
 		String pass = req.getParameter("pass");
+
+		String name = req.getParameter("name");
+		String nick = req.getParameter("nick");
+		String email = req.getParameter("email");
+		String hp = req.getParameter("hp");
+		String zip = req.getParameter("zip");
+		String addr1 = req.getParameter("addr1");
+		String addr2 = req.getParameter("addr2");
+		
+		
 		
 		logger.debug("kind : "+kind);
 		logger.debug("uid : "+uid);
@@ -64,7 +75,19 @@ public class MyInfoController extends HttpServlet{
 			
 			break;
 		case "MODIFY":
-
+			UserDTO dto = new UserDTO();
+			dto.setUid(uid);
+			dto.setName(name);
+			dto.setNick(nick);
+			dto.setEmail(email);
+			dto.setHp(hp);
+			dto.setZip(zip);
+			dto.setAddr1(addr1);
+			dto.setAddr2(addr2);
+			
+			service.updateUser(dto);
+			resp.sendRedirect("/Jboard2/user/logout.do");
+			
 			break;
 		}
 		
