@@ -26,26 +26,30 @@ public class AuthEmailController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String type = req.getParameter("type");
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 		
 		int result = 0;
 		int status = 0;
 		
-		if(name == null) {
+		if(type.equals("REGISTER")) {
 			// 회원가입할 때 이메일 인증
 			result = service.selectCountEmail(email);
 			status = service.sendCodeByEmail(email);
-		} else {
+		} else if(type.equals("FIND_ID")){
 			// 아이디찾기 할때 이메일 인증
 			result = service.selectCountNameAndEmail(name, email);
+			
+			logger.info("result"+result);
 			
 			if(result == 1) { // 이름, 이메일 둘다 있을시
 				status = service.sendCodeByEmail(email);
 			}
 		}
-		
-		
+		logger.info("Auth name : "+name);
+		logger.info("Auth email : "+email);
+
 		// json 생성
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);

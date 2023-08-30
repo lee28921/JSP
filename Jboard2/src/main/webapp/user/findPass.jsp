@@ -33,7 +33,7 @@
 
                 <div>
                     <a href="./login.jsp" class="btn btnCancel">취소</a>
-                    <a href="./findPassChange.jsp" class="btn btnNext">다음</a>
+                    <a href="./findPassChange.do" class="btn btnNext">다음</a>
                 </div>
             </section>
         </main>

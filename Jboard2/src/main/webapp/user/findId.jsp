@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script src="/Jboard2/js/validation.js"></script>
 <script src="/Jboard2/js/authEmail.js"></script>
 <script>
 	$(function(){
 		
 		$('.btnNext').click(function(e){
-			e.preventDefult();
+			e.preventDefault();
 			
 			if(isEmailOk){
-				
 				$('#formFindId').submit();
 			} else{
 				alert('이메일 인증을 완료하셔야 합니다.');
@@ -20,7 +20,8 @@
 </script>
         <main id="user">
             <section class="find findId">
-                <form id="formFindId" action="/Jboard2/user/findIdResult.do" method="GET">
+                <form id="formFindId" action="/Jboard2/user/findIdResult.do" method="POST">
+                	<input type="hidden" name="type" value="FIND_ID"/>
                     <table border="0">
                         <caption>아이디 찾기</caption>
                         <tr>
@@ -51,7 +52,7 @@
 
                 <div>
                     <a href="/Jboard2/user/login.do" class="btn btnCancel">취소</a>
-                    <a href="/Jboard2/user/findIdResult.do" class="btn btnNext">다음</a>
+                    <a href="#" class="btn btnNext">다음</a>
                 </div>
             </section>
         </main>
