@@ -148,8 +148,8 @@
                             <td>
                                 
                                 <input type="email" name="email" value="${sessUser.email}" placeholder="이메일 입력"/>
-                                <span class="resultEmail"></span>
                                 <button type="button" id="btnEmailCode"><img src="../img/chk_auth.gif" alt="인증번호 받기"/></button>
+                                <span class="resultEmail"></span>
                                 <div class="auth">
                                     <input type="text" name="auth" placeholder="인증번호 입력"/>
                                     <button type="button" id="btnEmailAuth"><img src="../img/chk_confirm.gif" alt="확인"/></button>

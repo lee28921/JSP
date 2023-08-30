@@ -46,19 +46,19 @@ $(function(){
 						
 						// 아이디, 비밀번호 찾기
 						if(data.status > 0){ // 인증받기
-							$('.resultEmailForId').text('이메일을 확인 후 인증코드를 입력하세요.');
+							$('.resultEmailForId').css('color', 'green').text('이메일을 확인 후 인증코드를 입력하세요.');
 							$('.resultEmailForPass').css('color', 'green').text('이메일을 확인 후 인증코드를 입력하세요.');
 							$('input[name=auth]').prop('disabled',false);
 						} else {
-							$('.resultEmailForId').text('인증코드 전송이 실패했습니다. 잠시 후 다시 시도해 주십시오.');
-							$('.resultEmailForPass').text('인증코드 전송이 실패했습니다. 잠시 후 다시 시도해 주십시오.');
+							$('.resultEmailForId').css('color', 'red').text('인증코드 전송이 실패했습니다. 잠시 후 다시 시도해 주십시오.');
+							$('.resultEmailForPass').css('color', 'red').text('인증코드 전송이 실패했습니다. 잠시 후 다시 시도해 주십시오.');
 						}
 						
 					}else{
 						
 						// 회원가입
 						if(data.status > 0){ // 인증받기
-							$('.resultEmail').text('이메일을 확인 후 인증코드를 입력하세요.');
+							$('.resultEmail').css('color', 'green').text('이메일을 확인 후 인증코드를 입력하세요.');
 							$('.auth').show();
 							$('input[name=email]').attr('readonly',true);
 						} else {
