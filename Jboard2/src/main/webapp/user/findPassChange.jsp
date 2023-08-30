@@ -7,7 +7,7 @@
                         <caption>비밀번호 변경</caption>                        
                         <tr>
                             <td>아이디</td>
-                            <td>honggildong</td>
+                            <td>${uid}</td>
                         </tr>
                         <tr>
                             <td>새 비밀번호</td>
@@ -30,8 +30,8 @@
                 </p>
 
                 <div>
-                    <a href="./login.html" class="btn btnCancel">취소</a>
-                    <a href="./login.html" class="btn btnNext">다음</a>
+                    <a href="/Jboard2/user/login.do" class="btn btnCancel">취소</a>
+                    <a href="/Jboard2/user/login.do" class="btn btnNext">다음</a>
                 </div>
             </section>
         </main>

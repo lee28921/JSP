@@ -49,7 +49,7 @@ public class UserDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_USER_UID);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_UID);
 			psmt.setString(1, uid);
 			rs = psmt.executeQuery();
 			
@@ -70,7 +70,7 @@ public class UserDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_USER_NICK);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_NICK);
 			psmt.setString(1, nick);
 			rs = psmt.executeQuery();
 			
@@ -92,7 +92,7 @@ public class UserDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_USER_EMAIL);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_EMAIL);
 			psmt.setString(1, email);
 			rs = psmt.executeQuery();
 			
@@ -113,7 +113,7 @@ public class UserDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_USER_NAME_EMAIL);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_NAME_EMAIL);
 			psmt.setString(1, name);
 			psmt.setString(2, email);
 			rs = psmt.executeQuery();
@@ -124,6 +124,28 @@ public class UserDAO extends DBHelper{
 			close();
 		} catch(Exception e) {
 			logger.error("selectCountEmail() error : "+e.getMessage());
+		}
+		
+		return result;
+		
+	}
+	public int selectCountUidAndEmail(String uid,String email) {
+		
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_UID_EMAIL);
+			psmt.setString(1, uid);
+			psmt.setString(2, email);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		} catch(Exception e) {
+			logger.error("selectCountUidAndEmail() error : "+e.getMessage());
 		}
 		
 		return result;

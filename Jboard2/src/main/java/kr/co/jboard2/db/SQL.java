@@ -16,10 +16,12 @@ public class SQL {
 												+ "`regDate`=NOW()";
 		public static final String SELECT_USER		= "SELECT * FROM `User` WHERE `uid`=? AND `pass`=SHA2(?,256)";
 		public static final String SELECT_USER_BY_NAME_AND_EMAIL = "SELECT * FROM `User` WHERE `name`=? AND `email`=?";
-		public static final String SELECT_USER_UID	= "SELECT COUNT(*) FROM `User` WHERE `uid`=?";
-		public static final String SELECT_USER_NICK	= "SELECT COUNT(*) FROM `User` WHERE `nick`=?";
-		public static final String SELECT_USER_EMAIL= "SELECT COUNT(*) FROM `User` WHERE `email`=?";
-		public static final String SELECT_USER_NAME_EMAIL= "SELECT COUNT(*) FROM `User` WHERE `name`=? AND `email`=?";
+		public static final String SELECT_USER_PASS = "SELECT * FROM `User` WHERE `uid`=? AND `name`=? AND `email`=?";
+		public static final String SELECT_COUNT_UID	= "SELECT COUNT(*) FROM `User` WHERE `uid`=?";
+		public static final String SELECT_COUNT_NICK	= "SELECT COUNT(*) FROM `User` WHERE `nick`=?";
+		public static final String SELECT_COUNT_EMAIL= "SELECT COUNT(*) FROM `User` WHERE `email`=?";
+		public static final String SELECT_COUNT_NAME_EMAIL= "SELECT COUNT(*) FROM `User` WHERE `name`=? AND `email`=?";
+		public static final String SELECT_COUNT_UID_EMAIL= "SELECT COUNT(*) FROM `User` WHERE `uid`=? AND `email`=?";
 		public static final String SELECT_USER_HP	= "SELECT COUNT(*) FROM `User` WHERE `hp`=?";
 		
 		// Article

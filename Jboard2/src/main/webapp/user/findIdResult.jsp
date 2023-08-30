@@ -30,7 +30,7 @@
 
                 <div>
                     <a href="/Jboard2/user/login.do" class="btn btnCancel">로그인</a>
-                    <a href="/Jboard2/user/FindPassController.do" class="btn btnNext">비밀번호 찾기</a>
+                    <a href="/Jboard2/user/FindPass.do" class="btn btnNext">비밀번호 찾기</a>
                 </div>
             </section>
         </main>

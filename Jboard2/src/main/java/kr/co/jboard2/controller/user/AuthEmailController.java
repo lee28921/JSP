@@ -27,6 +27,7 @@ public class AuthEmailController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String type = req.getParameter("type");
+		String uid = req.getParameter("uid");
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 		
@@ -36,7 +37,11 @@ public class AuthEmailController extends HttpServlet {
 		if(type.equals("REGISTER")) {
 			// 회원가입할 때 이메일 인증
 			result = service.selectCountEmail(email);
-			status = service.sendCodeByEmail(email);
+			
+			if(result == 0) { // 중복된 이메일 방지
+				status = service.sendCodeByEmail(email);
+			}
+			
 		} else if(type.equals("FIND_ID")){
 			// 아이디찾기 할때 이메일 인증
 			result = service.selectCountNameAndEmail(name, email);
@@ -46,7 +51,17 @@ public class AuthEmailController extends HttpServlet {
 			if(result == 1) { // 이름, 이메일 둘다 있을시
 				status = service.sendCodeByEmail(email);
 			}
+		} else if(type.equals("FIND_PASS")) {
+			result = service.selectCountUidAndEmail(uid, email);
+			
+			logger.info("Auth uid : "+uid);
+			
+			if(result == 1) {
+				status = service.sendCodeByEmail(email);
+			}
 		}
+		
+		
 		logger.info("Auth name : "+name);
 		logger.info("Auth email : "+email);
 
