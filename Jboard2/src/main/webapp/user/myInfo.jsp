@@ -4,17 +4,42 @@
 <script>
 	window.onload = function(){
 		
-		const inputUid = document.getElementsByName('uid')[0];
+		const inputUid	= document.getElementsByName('uid')[0];
+		const inputPass = document.getElementsByName('pass2')[0];
 		
 		// 비밀번호 변경
 		const btnUpdatePass = document.getElementById('btnUpdatePass');
 		btnUpdatePass.addEventListener('click',function(){
 			
-			fetch('/Jboard2/user/myInfo.do')
-				.then((response)=>response.json())
-				.then((data)={
-						
-				});
+			if(isPassOk && confirm('정말 비밀번호를 수정하시겠습니까?')){
+				
+				// 폼데이터 객체 전송안됨...
+				const formData = new FormData();
+				formData.append('kind', 'PASSWORD');
+				formData.append('uid',inputUid.value);
+				formData.append('pass',inputPass.value);
+
+				// fetch 함수에서 post 데이터 전송을 위해 URLSearchParams 사용
+				const params = new URLSearchParams();
+				params.append('kind', 'PASSWORD');
+				params.append('uid',inputUid.value);
+				params.append('pass',inputPass.value);
+				
+				fetch('/Jboard2/user/myInfo.do',{
+						method: 'POST',
+						body : params
+					})
+					.then((response)=>response.json())
+					.then((data)={
+							console.log('data : '+data);
+							alert('비밀번호가 수정되었습니다. 다시 로그인 하십시오.');
+							location.href = '/Jboard2/user/logout.do';
+							
+					});
+				
+			} else {
+				alert('변경할 비밀번호가 유효하지 않거나 일치하지 않습니다.');
+			}
 			
 		});
 		

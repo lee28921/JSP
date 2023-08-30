@@ -35,25 +35,33 @@ public class MyInfoController extends HttpServlet{
 		
 		String kind = req.getParameter("kind");
 		String uid = req.getParameter("uid");
+		String pass = req.getParameter("pass");
 		
 		logger.debug("kind : "+kind);
 		logger.debug("uid : "+uid);
+		logger.debug("pass : "+pass);
 		
 		switch(kind) {
 		case "WITHDRAW": // 탈퇴하기
-			int result = service.updateUserForWithdraw(uid);
+			int result1 = service.updateUserForWithdraw(uid);
 			
-			JsonObject json = new JsonObject();
-			json.addProperty("result",result);
+			JsonObject json1 = new JsonObject();
+			json1.addProperty("result",result1);
 			
-			resp.getWriter().print(json);
+			resp.getWriter().print(json1);
 			
 			// ajax 요청이기 때문에 응답처리 불가
 			//resp.sendRedirect("/Jboard2/user/login.do?success=400");
 			
 			break;
 		case "PASSWORD":
-
+			int result2 = service.updatePassword(uid, pass);
+			
+			JsonObject json2 = new JsonObject();
+			json2.addProperty("result",result2);
+			
+			resp.getWriter().print(json2);
+			
 			break;
 		case "MODIFY":
 
