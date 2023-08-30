@@ -24,6 +24,8 @@ public class SQL {
 		public static final String SELECT_COUNT_UID_EMAIL= "SELECT COUNT(*) FROM `User` WHERE `uid`=? AND `email`=?";
 		public static final String SELECT_USER_HP	= "SELECT COUNT(*) FROM `User` WHERE `hp`=?";
 		
+		public static final String UPDATE_USER_PASS = "UPDATE `User` SET `pass`=SHA2(?,256) WHERE `uid`=?";
+		
 		// Article
 		public final static String INSERT_ARITCLE = "INSERT INTO `Article` SET "
 													+ "`title`=?,"

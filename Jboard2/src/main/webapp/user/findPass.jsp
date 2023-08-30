@@ -20,7 +20,7 @@
 </script>
         <main id="user">
             <section class="find findPass">
-                <form id="formFindPass" action="/Jboard2/user/findPassChange.do" method="POST">
+                <form id="formFindPass" action="/Jboard2/user/findPass.do" method="POST">
                 	<input type="hidden" name="type" value="FIND_PASS"/>
                     <table border="0">
                         <caption>비밀번호 찾기</caption>                        

@@ -247,6 +247,21 @@ public class UserDAO extends DBHelper{
 	}
 	
 	public void updateUser(UserDTO dto) {}
+	public void updatePassword(String uid, String pass) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_USER_PASS);
+			psmt.setString(1, pass);
+			psmt.setString(2, uid);
+			
+			psmt.executeUpdate();
+			
+			close();
+			
+		} catch(Exception e) {
+			logger.error("updatePassword() error : "+e.getMessage());
+		}
+	}
 	
 	public void deleteUser(String uid) {}
 

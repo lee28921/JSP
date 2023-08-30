@@ -20,17 +20,24 @@ public class FindPassChangeController extends HttpServlet {
 
 	private static final long serialVersionUID = 3184963205046179155L;
 	
+	private UserService service = UserService.getInstance();
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-		String uid = req.getParameter("uid");
-		
-		req.setAttribute("uid", uid);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPassChange.jsp");
 		dispatcher.forward(req, resp);
 	
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String uid = req.getParameter("uid");
+		String pass = req.getParameter("pass1");
+	
+		service.updatePassword(uid, pass);
+		
+		resp.sendRedirect("/Jboard2/user/login.do?success=300");
+		
 	}
 }
