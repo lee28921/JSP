@@ -1,6 +1,7 @@
 package kr.co.jboard2.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,11 +30,18 @@ public class ViewController extends HttpServlet {
 		
 		String no = req.getParameter("no");
 		
+		// 게시글 보기
 		ArticleDTO article = service.selectArticle(no);
 		req.setAttribute("article", article);
 		
 		logger.debug("Article no : "+article.getNo());
 		logger.debug("Article file : "+article.getFile());
+		
+		// 댓글 조회
+		List<ArticleDTO> comments = service.selectComments(no);
+		req.setAttribute("comments", comments);
+		
+		logger.debug("comments Empty : "+comments.isEmpty());
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/view.jsp");
 		dispatcher.forward(req, resp);
