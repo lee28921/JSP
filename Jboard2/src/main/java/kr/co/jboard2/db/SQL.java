@@ -62,6 +62,7 @@ public class SQL {
 														+ "`regip`=?,"
 														+ "`rdate`=NOW()";
 		
+		public final static String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `Article`";
 		public final static String SELECT_ARITCLE = "SELECT * FROM `Article` WHERE `no`=?";
 		public final static String SELECT_ARITCLES = "SELECT "
 														+ "a.*, "
@@ -93,4 +94,11 @@ public class SQL {
 		
 		// terms
 		public final static String SELECT_TERMS = "SELECT * FROM `Terms`";
+		
+		// file
+		public final static String INSERT_FILE = "INSERT INTO `File` SET "
+													+ "`ano`=?, "
+													+ "`ofile`=?, "
+													+ "`sfile`=?, "
+													+ "`rdate`=NOW() ";
 }

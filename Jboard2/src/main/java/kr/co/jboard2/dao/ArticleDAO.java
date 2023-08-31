@@ -20,22 +20,32 @@ public class ArticleDAO extends DBHelper {
 	}
 	private ArticleDAO() {}
 	
-	public void insertArticle(ArticleDTO dto) {
+	public int insertArticle(ArticleDTO dto) {
+		
+		int no = 0;
 		
 		try {
 			conn = getConnection();
+			stmt = conn.createStatement();
 			psmt = conn.prepareStatement(SQL.INSERT_ARITCLE);
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getWriter());
 			psmt.setString(4, dto.getRegip());
-			psmt.executeUpdate();
+			psmt.executeUpdate(); // 게시글을 저장
+			rs = stmt.executeQuery(SQL.SELECT_MAX_NO); // 해당 게시글의 글번호 조회
+			
+			if(rs.next()) {
+				no = rs.getInt(1);
+			}
 			
 			close();
 			
 		} catch (Exception e) {
 			logger.error("insertArticle() error : "+e.getMessage());
 		}
+		
+		return no;
 		
 	}
 	public ArticleDTO selectArticle(int no) {
