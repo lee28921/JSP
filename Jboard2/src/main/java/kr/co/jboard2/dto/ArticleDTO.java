@@ -13,6 +13,17 @@ public class ArticleDTO {
 	private String writer;
 	private String regip;
 	private String rdate;
+	
+	// 추가
+	private String nick;
+	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	
 	public int getNo() {
 		return no;
 	}
@@ -85,8 +96,11 @@ public class ArticleDTO {
 	public String getRdate() {
 		return rdate;
 	}
-	public void setRdate(String rdate) {
+	public void setRdateFull(String rdate) {
 		this.rdate = rdate;
+	}
+	public void setRdate(String rdate) {
+		this.rdate = rdate.substring(0,10);
 	}
 	
 	

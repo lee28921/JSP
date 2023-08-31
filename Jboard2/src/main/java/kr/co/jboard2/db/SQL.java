@@ -49,7 +49,7 @@ public class SQL {
 												+ "WHERE `uid`=?";
 		
 		// Article
-		public final static String INSERT_ARITCLE = "INSERT INTO `Article` SET "
+		public final static String INSERT_ARTICLE = "INSERT INTO `Article` SET "
 													+ "`title`=?,"
 													+ "`content`=?,"
 													+ "`file`=?,"
@@ -64,8 +64,8 @@ public class SQL {
 														+ "`rdate`=NOW()";
 		
 		public final static String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `Article`";
-		public final static String SELECT_ARITCLE = "SELECT * FROM `Article` WHERE `no`=?";
-		public final static String SELECT_ARITCLES = "SELECT "
+		public final static String SELECT_ARTICLE = "SELECT * FROM `Article` WHERE `no`=?";
+		public final static String SELECT_ARTICLES = "SELECT "
 														+ "a.*, "
 														+ "b.`nick` "
 														+ "FROM `Article` AS a "
@@ -80,7 +80,7 @@ public class SQL {
 														+ "FROM `Article` AS a "
 														+ "JOIN `User` AS b ON a.writer = b.uid "
 														+ "WHERE `parent`=?";
-		public final static String UPDATE_ARITCLE = "UPDATE `Article` SET "
+		public final static String UPDATE_ARTICLE = "UPDATE `Article` SET "
 														+ "`title`=?, "
 														+ "`content`=? "
 														+ "WHERE `no`=?";
