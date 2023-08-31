@@ -40,9 +40,6 @@ public class ListController extends HttpServlet{
 			int currentPage = 1;
 			int total = service.selectCountTotal();
 			int lastPageNum = 0;
-			int pageGroupCurrent = 1;
-			int pageGroupStart = 1;
-			int pageGroupEnd = 0;
 			
 			// 현재 페이지 계산
 			if(pg != null){
@@ -67,6 +64,10 @@ public class ListController extends HttpServlet{
 			req.setAttribute("lastPageNum", lastPageNum);
 			
 			// 페이지 그룹계산
+			int pageGroupCurrent = 1;
+			int pageGroupStart = 1;
+			int pageGroupEnd = 0;
+			
 			pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
 			pageGroupStart = (pageGroupCurrent - 1) * 10 + 1; 
 			pageGroupEnd = pageGroupCurrent * 10;
@@ -81,6 +82,8 @@ public class ListController extends HttpServlet{
 			req.setAttribute("pageGroupCurrent", pageGroupCurrent);
 			req.setAttribute("pageGroupStart", pageGroupStart);
 			req.setAttribute("pageGroupEnd", pageGroupEnd);
+			
+			
 			
 			List<ArticleDTO> articles = service.selectArticles(start);
 			req.setAttribute("articles", articles);

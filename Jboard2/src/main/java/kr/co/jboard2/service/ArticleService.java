@@ -53,6 +53,9 @@ public enum ArticleService {
 	public List<ArticleDTO> selectComments(String parent) {
 		return dao.selectComments(parent);
 	}
+	public void updateArticleForCommentPlus(String no) {
+		dao.updateArticleForCommentPlus(no);
+	}
 	
 	// 업로드 경로 구하기
 	public String getFilePath(HttpServletRequest req) {

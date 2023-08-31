@@ -61,6 +61,7 @@ public class ViewController extends HttpServlet {
 		logger.debug("writer : "+writer);
 		logger.debug("regip : "+regip);
 		
+		// 댓글 저장
 		ArticleDTO dto = new ArticleDTO();
 		dto.setContent(content);
 		dto.setParent(parent);
@@ -68,6 +69,9 @@ public class ViewController extends HttpServlet {
 		dto.setRegip(regip);
 		
 		service.insertComment(dto);
+		
+		// 게시글 댓글 갯수 추가
+		service.updateArticleForCommentPlus(parent);
 		
 		resp.sendRedirect("/Jboard2/view.do?no="+parent);
 		
