@@ -25,6 +25,8 @@ public class ViewController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.info("ViewController doGet...1");
+		
 		String no = req.getParameter("no");
 		
 		ArticleDTO article = service.selectArticle(no);
@@ -39,7 +41,27 @@ public class ViewController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	
+		logger.info("ViewController doPost...1");
+		
+		String parent = req.getParameter("parent");
+		String content = req.getParameter("content");
+		String writer = req.getParameter("writer");
+		String regip = req.getRemoteAddr();
+		
+		logger.debug("parent : "+parent);
+		logger.debug("content : "+content);
+		logger.debug("writer : "+writer);
+		logger.debug("regip : "+regip);
+		
+		ArticleDTO dto = new ArticleDTO();
+		dto.setContent(content);
+		dto.setParent(parent);
+		dto.setWriter(writer);
+		dto.setRegip(regip);
+		
+		service.insertComment(dto);
+		
+		resp.sendRedirect("/Jboard2/view.do?no="+parent);
+		
 	}
 }

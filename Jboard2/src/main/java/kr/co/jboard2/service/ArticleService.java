@@ -34,15 +34,21 @@ public enum ArticleService {
 	public List<ArticleDTO> selectArticles(int start) {
 		return dao.selectArticles(start);
 	}
-	public int selectCountTotal() {
-		return dao.selectCountTotal();
-	}
 	
 	public void updateArticle(ArticleDTO dto) {
 		dao.updateArticle(dto);
 	}
 	public void deleteArticle(int no) {
 		dao.deleteArticle(no);
+	}
+	
+	// 추가
+	public int selectCountTotal() {
+		return dao.selectCountTotal();
+	}
+	
+	public void insertComment(ArticleDTO dto) {
+		dao.insertComment(dto);
 	}
 	
 	// 업로드 경로 구하기
