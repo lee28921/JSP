@@ -59,6 +59,12 @@ public class WriteController extends HttpServlet {
 		String oName	= mr.getOriginalFileName("file");
 		String regip	= req.getRemoteAddr();
 		
+		logger.debug("title : "+title);
+		logger.debug("content : "+content);
+		logger.debug("writer : "+writer);
+		logger.debug("file : "+oName);
+		logger.debug("regip : "+regip);
+		
 		// DTO 생성
 		ArticleDTO dto = new ArticleDTO();
 		dto.setTitle(title);
@@ -67,9 +73,12 @@ public class WriteController extends HttpServlet {
 		dto.setWriter(writer);
 		dto.setRegip(regip);
 		
+		logger.debug("file Count : "+dto.getFile());
+		
 		// 글 Insert
 		int no = aService.insertArticle(dto); // 게시글 먼저 저장
 		
+		logger.debug("file ArticleNo :"+no);
 		
 		// 파일명 수정
 		if(oName != null) {
