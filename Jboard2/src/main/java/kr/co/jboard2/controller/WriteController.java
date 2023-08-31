@@ -67,7 +67,7 @@ public class WriteController extends HttpServlet {
 		dto.setRegip(regip);
 		
 		// 글 Insert
-		int no = aService.insertArticle(dto);
+		int no = aService.insertArticle(dto); // 게시글 먼저 저장
 		
 		
 		// 파일명 수정
@@ -87,7 +87,7 @@ public class WriteController extends HttpServlet {
 			
 			// 파일 테이블 Insert
 			FileDTO fileDto = new FileDTO();
-			fileDto.setAno(no);
+			fileDto.setAno(no); // 저장된 게시글 조회 후 file 테이블에 저장
 			fileDto.setOfile(oName);
 			fileDto.setSfile(sName);
 			
