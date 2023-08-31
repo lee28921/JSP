@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.jboard2.dto.ArticleDTO;
 import kr.co.jboard2.dto.FileDTO;
@@ -41,16 +40,7 @@ public class WriteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		// 파일 업로드 경로 구하기
-		ServletContext ctx = req.getServletContext();
-		String path = ctx.getRealPath("/upload");
-		
-		// 최대 업로드 파일 크기
-		int maxSize = 1024 * 1024 * 10;
-		
-		// 파일 업로드 및 Multipart 객체 생성
-		MultipartRequest mr = new MultipartRequest(req, path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
-		
+		MultipartRequest mr = aService.uploadFile(req);
 		
 		// 폼 데이터 수신
 		String title	= mr.getParameter("title");
@@ -83,17 +73,7 @@ public class WriteController extends HttpServlet {
 		// 파일명 수정
 		if(oName != null) {
 		
-			int i = oName.lastIndexOf(".");
-			String ext = oName.substring(i);
-			
-			String uuid = UUID.randomUUID().toString();
-			String sName = uuid + ext;
-			
-			File f1 = new File(path+"/"+oName); // 저장된 파일의 객체
-			File f2 = new File(path+"/"+sName); // 가상의 파일 객체
-			
-			// 파일명 수정
-			f1.renameTo(f2);
+		String sName = aService.renameToFile(req, oName);
 			
 			// 파일 테이블 Insert
 			FileDTO fileDto = new FileDTO();
