@@ -61,9 +61,13 @@ public class ArticleDAO extends DBHelper {
 		
 		try {
 			conn = getConnection();
+			
+			psmt2 = conn.prepareStatement(SQL.UPDATE_ARTICLE_HIT_PLUS);
 			psmt = conn.prepareStatement(SQL.SELECT_ARTICLE);
 			psmt.setString(1, no);
+			psmt2.setString(1, no);
 			rs = psmt.executeQuery();
+			psmt2.executeUpdate();
 			
 			if(rs.next()) {
 				dto = new ArticleDTO();
@@ -89,6 +93,7 @@ public class ArticleDAO extends DBHelper {
 				dto.setFileDto(fileDto);
 				
 			}
+			
 			close();
 		}catch(Exception e) {
 			logger.error("selectArticle() error : "+e.getMessage());

@@ -143,7 +143,7 @@
                         </div>
                     </article>
 					</c:forEach>
-					<c:if test="${empty comments}">
+					<c:if test="${comments.size() == 0}">
                     <p class="empty">등록된 댓글이 없습니다.</p>
 					</c:if>
                 </section>

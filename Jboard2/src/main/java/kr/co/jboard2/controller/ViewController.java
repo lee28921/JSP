@@ -36,6 +36,7 @@ public class ViewController extends HttpServlet {
 		
 		logger.debug("Article no : "+article.getNo());
 		logger.debug("Article file : "+article.getFile());
+		logger.debug("Article hit : "+article.getHit());
 		
 		// 댓글 조회
 		List<ArticleDTO> comments = service.selectComments(no);

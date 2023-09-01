@@ -96,6 +96,7 @@ public class SQL {
 														+ "`title`=?, "
 														+ "`content`=? "
 														+ "WHERE `no`=?";
+		public final static String UPDATE_ARTICLE_HIT_PLUS = "UPDATE `Article` SET `hit`=`hit`+1 WHERE `no`=?";
 		public final static String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?";
 		
 		public final static String UPDATE_ARTICLE_FOR_COMMENT_PLUS = "UPDATE `Article` SET `comment`=`comment`+1 WHERE `no`=?";
