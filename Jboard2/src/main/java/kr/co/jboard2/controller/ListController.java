@@ -29,7 +29,9 @@ public class ListController extends HttpServlet{
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
+			// 데이터 수신
 			String pg = req.getParameter("pg");
+			String search = req.getParameter("search");
 			
 			// 현재 세션 가져오기
 			HttpSession session = req.getSession();
@@ -38,7 +40,7 @@ public class ListController extends HttpServlet{
 			// 페이지 관련 변수
 			int start = 0;
 			int currentPage = 1;
-			int total = service.selectCountTotal();
+			int total = 0;
 			int lastPageNum = 0;
 			
 			// 현재 페이지 계산
@@ -56,6 +58,8 @@ public class ListController extends HttpServlet{
 			}else{
 				lastPageNum = (total / 10) + 1; 
 			}
+			
+			total = service.selectCountTotal(search);
 			
 			logger.debug("total : "+total);
 			logger.debug("lastPageNum : "+lastPageNum);
@@ -85,7 +89,7 @@ public class ListController extends HttpServlet{
 			
 			
 			
-			List<ArticleDTO> articles = service.selectArticles(start);
+			List<ArticleDTO> articles = service.selectArticles(start,search);
 			req.setAttribute("articles", articles);
 			
 			if(sessUser != null) {

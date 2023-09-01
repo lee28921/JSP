@@ -96,14 +96,22 @@ public class ArticleDAO extends DBHelper {
 		
 		return dto;
 	}
-	public List<ArticleDTO> selectArticles(int start) {
+	public List<ArticleDTO> selectArticles(int start, String search) {
 		
 		List<ArticleDTO> articles = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_ARTICLES);
-			psmt.setInt(1, start);
+			
+			if(search == null) {
+				psmt = conn.prepareStatement(SQL.SELECT_ARTICLES);
+				psmt.setInt(1, start);
+			}else {
+				psmt = conn.prepareStatement(SQL.SELECT_ARTICLES_FOR_SEARCH);
+				psmt.setString(1, "%"+search+"%");
+				psmt.setInt(2, start);
+			}
+			
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -148,12 +156,18 @@ public class ArticleDAO extends DBHelper {
 	}
 	
 	// 추가
-	public int selectCountTotal() {
+	public int selectCountTotal(String search) {
 		int total = 0;
 
 		try {
 		conn = getConnection();
-		psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
+		if(search == null) { // 검색 키워드가 없다면
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
+		} else {
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL_FOR_SEARCH);
+			psmt.setString(1, "%"+search+"%");
+		}
+		
 		rs = psmt.executeQuery();
 
 		if(rs.next()) {
