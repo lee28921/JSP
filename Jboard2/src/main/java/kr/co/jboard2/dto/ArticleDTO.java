@@ -1,5 +1,6 @@
 package kr.co.jboard2.dto;
 
+
 public class ArticleDTO {
 	
 	private int no;
@@ -16,12 +17,20 @@ public class ArticleDTO {
 	
 	// 추가
 	private String nick;
+	private FileDTO fileDto;
 	
 	public String getNick() {
 		return nick;
 	}
 	public void setNick(String nick) {
 		this.nick = nick;
+	}
+	
+	public FileDTO getFileDto() {
+		return fileDto;
+	}
+	public void setFileDto(FileDTO fileDto) {
+		this.fileDto = fileDto;
 	}
 	
 	public int getNo() {
