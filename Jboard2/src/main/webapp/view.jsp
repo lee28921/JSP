@@ -3,6 +3,43 @@
 <%@ include file="./_header.jsp" %>
 <script>
 	$(function(){
+		
+		// 댓글 삭제(동적 생성 이벤트 구현)
+		$(document).on('click','.remove',function(e){
+			e.preventDefault();
+			
+			//alert('클릭');
+			
+			const no = $(this).data('no');
+			const article = $(this).parent().parent();
+			
+			console.log('no : '+no);
+			
+			const jsonData = {
+					"kind":"REMOVE",
+					"no":no
+			}
+			
+			$.ajax({
+				url: '/Jboard2/comment.do',
+				type: 'GET',
+				data: jsonData,
+				dataType: 'json',
+				success : function(data){
+					
+					if(data.result > 0){
+						alert('댓글이 삭제 되었습니다.');
+						
+						// 화면처리
+						article.remove();
+						
+					}
+				}
+			});
+			
+		});
+		
+		// 댓글 입력
 		$('#btnComment').click(function(e){
 			e.preventDefault();
 			
@@ -101,7 +138,7 @@
                         <span class="date">${comment.rdate}</span>
                         <p class="content">${comment.content}</p>                        
                         <div>
-                            <a href="#" class="remove">삭제</a>
+                            <a href="#" class="remove" data-no="${comment.no}">삭제</a>
                             <a href="#" class="modify">수정</a>
                         </div>
                     </article>

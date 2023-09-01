@@ -63,6 +63,9 @@ public enum ArticleService {
 	public void updateArticleForCommentPlus(String no) {
 		dao.updateArticleForCommentPlus(no);
 	}
+	public int deleteComment(String no) {
+		return dao.deleteComment(no);
+	}
 	
 	// 업로드 경로 구하기
 	public String getFilePath(HttpServletRequest req) {
