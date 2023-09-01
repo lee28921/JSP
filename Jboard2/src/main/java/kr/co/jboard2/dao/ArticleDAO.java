@@ -131,7 +131,21 @@ public class ArticleDAO extends DBHelper {
 		return articles;
 	}
 	public void updateArticle(ArticleDTO dto) {}
-	public void deleteArticle(int no) {}
+	public void deleteArticle(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			
+			psmt.executeUpdate();
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("deleteArticles() error : "+e.getMessage());
+		}
+	}
 	
 	// 추가
 	public int selectCountTotal() {
