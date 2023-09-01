@@ -181,8 +181,8 @@ public class ArticleDAO extends DBHelper {
 		return total;
 	}
 	
-	public void insertComment(ArticleDTO dto) {
-		
+	public int insertComment(ArticleDTO dto) {
+		int result = 0;
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.INSERT_COMMENT);
@@ -191,12 +191,14 @@ public class ArticleDAO extends DBHelper {
 			psmt.setString(3, dto.getWriter());
 			psmt.setString(4, dto.getRegip());
 			
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			close();
 			
 		} catch(Exception e) {
 			logger.error("insertComment() error : "+e.getMessage());
 		}
+		
+		return result;
 		
 	}
 	

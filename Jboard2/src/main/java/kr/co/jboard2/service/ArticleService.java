@@ -54,8 +54,8 @@ public enum ArticleService {
 		return dao.selectCountTotal(search);
 	}
 	
-	public void insertComment(ArticleDTO dto) {
-		dao.insertComment(dto);
+	public int insertComment(ArticleDTO dto) {
+		return dao.insertComment(dto);
 	}
 	public List<ArticleDTO> selectComments(String parent) {
 		return dao.selectComments(parent);
