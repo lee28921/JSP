@@ -116,6 +116,11 @@
                     </c:if>
                     <tr>
                         <th>내용</th>
+                        <c:if test="${article.file > 0}">
+                        <td>
+                        	<img  src="" alt=""/>
+                        </td>
+                        </c:if>
                         <td>
                             <textarea name="content" readonly>${article.content}</textarea>
                         </td>
