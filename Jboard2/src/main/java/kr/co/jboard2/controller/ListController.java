@@ -29,70 +29,47 @@ public class ListController extends HttpServlet{
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
-			// 데이터 수신
-			String pg = req.getParameter("pg");
-			String search = req.getParameter("search");
-			
 			// 현재 세션 가져오기
 			HttpSession session = req.getSession();
 			UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
 			
-			// 페이지 관련 변수
-			int start = 0;
-			int currentPage = 1;
-			int total = 0;
-			int lastPageNum = 0;
+			// 데이터 수신
+			String pg = req.getParameter("pg");
+			String search = req.getParameter("search");
 			
-			// 현재 페이지 계산
-			if(pg != null){
-				currentPage = Integer.parseInt(pg);
-			}
-			req.setAttribute("currentPage", currentPage);
+			logger.debug("pg : "+pg);
+			logger.debug("search : "+search);
 			
-			// Limit 시작값 계산
-			start = (currentPage -1) * 10;
+			// 현재 페이지 번호
+			int currentPage = service.getCurrentPage(pg);
 			
-			// 페이지 번호 계산
-			if(total % 10 == 0){
-				lastPageNum = (total / 10);
-			}else{
-				lastPageNum = (total / 10) + 1; 
-			}
+			// 전체 게시물 갯수
+			int total = service.selectCountTotal(search);
 			
-			total = service.selectCountTotal(search);
-			
-			logger.debug("total : "+total);
-			logger.debug("lastPageNum : "+lastPageNum);
-			
-			req.setAttribute("total", total);
-			req.setAttribute("lastPageNum", lastPageNum);
+			// 마지막 페이지 번호
+			int lastPageNum = service.getLastPageNum(total);
 			
 			// 페이지 그룹계산
-			int pageGroupCurrent = 1;
-			int pageGroupStart = 1;
-			int pageGroupEnd = 0;
+			int[] result = service.getPageGroupNum(currentPage, lastPageNum);
 			
-			pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
-			pageGroupStart = (pageGroupCurrent - 1) * 10 + 1; 
-			pageGroupEnd = pageGroupCurrent * 10;
+			// 페이지 시작번호
+			int pageStartNum = service.getPageStartNum(total, currentPage);
 			
-			logger.debug("pageGroupCurrent : "+pageGroupCurrent);
-			logger.debug("pageGroupStart : "+pageGroupStart);
-			logger.debug("pageGroupEnd : "+pageGroupEnd);
-			
-			if(pageGroupEnd > lastPageNum){
-				pageGroupEnd = lastPageNum;
-			}
-			req.setAttribute("pageGroupCurrent", pageGroupCurrent);
-			req.setAttribute("pageGroupStart", pageGroupStart);
-			req.setAttribute("pageGroupEnd", pageGroupEnd);
-			
-			
+			int start = service.getStartNum(currentPage);
 			
 			List<ArticleDTO> articles = service.selectArticles(start,search);
-			req.setAttribute("articles", articles);
+			
 			
 			if(sessUser != null) {
+				
+				// VIEW 공유 참조
+				req.setAttribute("articles", articles);
+				req.setAttribute("currentPage", currentPage);
+				req.setAttribute("lastPageNum", lastPageNum);
+				req.setAttribute("pageGroupStart", result[0]);
+				req.setAttribute("pageGroupEnd", result[1]);
+				req.setAttribute("pageStartNum", pageStartNum+1);
+				
 				RequestDispatcher dispatcher = req.getRequestDispatcher("list.jsp");
 				dispatcher.forward(req, resp);
 				
