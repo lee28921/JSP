@@ -7,14 +7,14 @@ import kr.co.jboard2.dto.FileDTO;
 
 public enum FileService {
 	
-	INSTANCE;
+	INSTANCE, INSIANCE;
 	
 	private FileDAO dao = new FileDAO();
 	
 	public void insertFile(FileDTO dto) {
 		dao.insertFile(dto);
 	}
-	public FileDTO selectFile(int fno) {
+	public FileDTO selectFile(String fno) {
 		return dao.selectFile(fno);
 	}
 	public List<FileDTO> selectFiles() {
